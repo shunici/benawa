@@ -1,0 +1,58 @@
+<template>
+    <div>
+     <headerComponent></headerComponent>   
+     <marque-data></marque-data>      
+   <div class="container-fluid">
+          <router-view></router-view>
+   </div>
+    <footer-component></footer-component>
+         
+    </div>
+</template>
+
+<script>
+import footerComponent from './components/footerComponent.vue';
+import headerComponent from './components/headerComponent.vue';
+import MarqueData from './components/marqueData.vue'
+import { mapActions, mapState } from 'vuex'
+
+    export default {
+       components : {
+           headerComponent, footerComponent, MarqueData
+       },  
+       created () {
+              this.get_spk();                   
+            this.get_agenda(); 
+            this.get_alert();  
+            this.get_label();  
+                    this.get_info();  
+                this.get_karyawan();
+                this.get_warna();
+            
+       },   
+
+    computed : {
+        ...mapState('karyawan_stores', {
+            karyawans : state=> state.karyawans,
+            karyawan : state=> state.karyawan,
+        }),
+        ...mapState('label_stores', {
+                labels : state=> state.labels
+            }),
+        ...mapState('info_stores', {
+                infos : state=> state.infos
+            }),
+
+    },
+    methods : {
+            ...mapActions('info_stores', ['get_info']),
+        ...mapActions('karyawan_stores', ['get_karyawan']),     
+        ...mapActions('agenda_stores', ['get_agenda']),                  
+        ...mapActions('alert_stores', ['get_alert']),     
+         ...mapActions('label_stores', ['get_label']),  
+            ...mapActions('spk_stores', ['get_spk', 'get_warna']),    
+      
+    }
+
+    }
+</script>
