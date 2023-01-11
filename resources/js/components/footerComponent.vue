@@ -111,6 +111,7 @@
         <!-- Grid column -->
       </div>
       <!-- Grid row -->
+      <a href="https://shunici.github.io/program_hitung/" target="_blank" rel="noopener noreferrer">Menghitung Objek Dalam Ukuran</a>
     </div>
   </section>
   <!-- Section: Links  -->

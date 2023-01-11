@@ -324,10 +324,7 @@ export default {
         }
     },
     methods : {
-        ...mapActions('spk_stores', ['get_spk', 'spk_cs', 'edit_spk', 'remove_spk']),
-        hapus(param){
-                this.remove_spk(param);
-        },
+        ...mapActions('spk_stores', ['get_spk', 'spk_cs', 'edit_spk', 'remove_spk']),      
         edit(param){
              this.$router.push({
                   name : 'transaksi.edit',
@@ -381,7 +378,17 @@ export default {
          randomColor(id) {
             const r = () => Math.floor(256 * Math.random());
             return this.colorCache[id] || (this.colorCache[id] = `rgb(${r()}, ${r()}, ${r()})`);
-          }
+          },
+          
+        hapus(param){                                        
+              let person = prompt("Yakin anda menghapus file ini ? :", "ya");
+              if (person == null || person == "") {
+               
+              } else {
+                 this.remove_spk(param);
+              }
+             
+        }, 
 
        
     },
