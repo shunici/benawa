@@ -1,5 +1,5 @@
 <template>
-    <div class="marquee">
+    <div class="marquee noprint">
  
       <p style="font-size : 15px" v-for="(item, index) in infos.data" :key="index + 'info' ">
        

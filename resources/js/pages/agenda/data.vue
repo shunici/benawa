@@ -328,7 +328,7 @@
   </b-card-group>
 
 
-<footer-component></footer-component>    
+
 
   </div>
 </template>
