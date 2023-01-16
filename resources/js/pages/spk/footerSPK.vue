@@ -146,7 +146,7 @@ export default {
     methods : {
            ...mapActions('spk_stores', ['besar_uk_font', 'kecil_uk_font', 'pesan_aktif']),
            pesan(param){               
-                 this.$store.state.spk_stores.ket_lain.pesan = param
+                 this.$store.state.spk_stores.spk.text = param
            },     //ini utk format tiff      
            atur_resolusi(param){        
           
