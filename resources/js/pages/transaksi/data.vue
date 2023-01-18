@@ -406,7 +406,8 @@
     <b-card header-tag="header" footer-tag="footer"  v-if="cekBox.cs">
      <template #header>
         <h6 class="float-left mt-2 "> <b>CETAKAN SELESAI</b> <span class="badge badge-warning"> {{cs.length }}</span> </h6> 
-          <b-button  aria-controls="collapse-1"  @click="visible = !visible"  variant="primary" class="float-right">{{visible ? "Sembunyi" : "Detail"}}</b-button>       
+          <b-button  aria-controls="collapse-1"   variant="primary" class="float-right" @click="csd_array">Pindah Ke CSD</b-button>       
+
       </template>
       <b-collapse id="collapse-1"  v-model="visible" >
        <draggable v-model="item_cs"  group="items" v-bind="dragOptions" @change="log">
@@ -666,7 +667,7 @@ export default {
     },
     methods : {
       ...mapActions('alert_stores', ['edit_alert', 'get_alert']),
-        ...mapActions('spk_stores', ['get_spk', 'spk_csd', 'edit_spk', 'update_spk', 'remove_spk', 'gabung_spk', 'searching_spk', 'searching_nota', 'filter_spk', 'handle_spk']),        
+        ...mapActions('spk_stores', [ 'jadikan_csd', 'get_spk', 'spk_csd', 'edit_spk', 'update_spk', 'remove_spk', 'gabung_spk', 'searching_spk', 'searching_nota', 'filter_spk', 'handle_spk']),        
         hubungi (kost, wa, data, param) {
            
             let barang = '';
@@ -700,7 +701,10 @@ export default {
 
 
              
-        },                     
+        },   
+        csd_array(){
+          this.jadikan_csd();
+        },                
               dibuat (data){  //hanya membaca menit 
               const created = moment(data);
               const sekarang = moment();

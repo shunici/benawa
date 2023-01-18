@@ -20,12 +20,12 @@
             <b-button variant="danger" v-on:click="hapus(row.id)" class="btn-sm"><b-icon icon="trash-fill" aria-hidden="true"></b-icon> Hapus</b-button>
     </b-button-group>
             <!-- //jka ada spk_id -->
-            <strong v-if="row.spk_id" v-b-tooltip.hover.top="row.text_detail">{{row.text}}</strong> 
+            <strong v-if="row.spk_id" v-b-tooltip.hover.html="row.text_detail">{{row.text}}</strong> 
             <span v-if="row.spk_id" class="badge badge-warning" > {{row.spk.nama_pemesan}} | {{row.kategori}} | {{status_spk(row.spk.status)}}</span>
             <span v-if="row.spk_id" class="badge" :style="{'background-color' : row.spk.label.warna, 'font-size' : '12px' }">{{row.spk.label.nama}}</span>
                      <!-- //jka tidak ada spk_id -->
                      
-            <strong v-if="!row.spk_id" v-b-tooltip.hover.top="row.text_detail">{{row.text}}</strong> 
+            <strong v-if="!row.spk_id" v-b-tooltip.hover.html="row.text_detail">{{row.text}}</strong> 
             <span v-if="!row.spk_id" class="badge badge-warning" >{{row.kategori}}</span>
             
             

@@ -524,7 +524,17 @@ if (payload != '') {
               resolve(response.data)
           })
       })
-  }
+  },  
+  jadikan_csd({dispatch}) {      
+    return new Promise((resolve, reject) => {
+      axios.post(`/api/jadikan-csd`)
+      .then((response) => {       
+            dispatch('get_spk');
+            resolve(response.data);
+                  
+      })
+     })
+  },
 
   
    
