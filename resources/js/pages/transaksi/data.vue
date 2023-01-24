@@ -215,7 +215,7 @@
                            <td v-if="row.nama_brg" >    {{ andax + 1}}  </td>
                           <td v-if="row.nama_brg" class="text-left ellipsis"> <span>{{row.nama_brg}}</span>  </td>
                           <td v-if="row.nama_brg" class="text-center">   
-                              <span v-if="row.ukuranP">   {{row.ukuranP}} x {{row.ukuranL}}</span>
+                              <span v-if="row.ukuranP">   {{row.ukuranP}} <div v-if="row.ukuranL" >x</div> {{row.ukuranL}}</span>
                                           <span v-else>{{row.uk_alias}}</span>
                           </td>
                           <td v-if="row.nama_brg" class="text-center">{{row.bahan}}</td>
@@ -251,7 +251,7 @@
                             {{san.nama}}
                         </span>
 <br>
-                   <img v-if="item.foto" :src="item.foto" alt="Girl in a jacket" width="500"> 
+                   <img v-if="item.foto" :src="item.foto" alt="Girl in a jacket" width="230"> 
                     
                 </b-card>
             </b-collapse>
@@ -351,7 +351,7 @@
                            <td v-if="row.nama_brg" >    {{ andax + 1}}  </td>
                           <td v-if="row.nama_brg" class="text-left ellipsis"> <span>{{row.nama_brg}}</span>  </td>
                           <td v-if="row.nama_brg" class="text-center">   
-                              <span v-if="row.ukuranP">   {{row.ukuranP}} x {{row.ukuranL}}</span>
+                              <span v-if="row.ukuranP">   {{row.ukuranP}} <div v-if="row.ukuranL" >x</div> {{row.ukuranL}}</span>
                                           <span v-else>{{row.uk_alias}}</span>
                           </td>
                           <td v-if="row.nama_brg" class="text-center">{{row.bahan}}</td>
@@ -387,7 +387,7 @@
                             {{san.nama}}
                         </span>
 <br>
-                   <img v-if="item.foto" :src="item.foto" alt="Girl in a jacket" width="500"> 
+                   <img v-if="item.foto" :src="item.foto" alt="Girl in a jacket" width="230"> 
                     
                 </b-card>
             </b-collapse>
@@ -492,7 +492,7 @@
                            <td v-if="row.nama_brg" >    {{ andax + 1}}  </td>
                           <td v-if="row.nama_brg" class="text-left ellipsis"> <span>{{row.nama_brg}}</span>  </td>
                           <td v-if="row.nama_brg" class="text-center">   
-                              <span v-if="row.ukuranP">   {{row.ukuranP}} x {{row.ukuranL}}</span>
+                             <span v-if="row.ukuranP">   {{row.ukuranP}} <div v-if="row.ukuranL" >x</div> {{row.ukuranL}}</span>
                                           <span v-else>{{row.uk_alias}}</span>
                           </td>
                           <td v-if="row.nama_brg" class="text-center">{{row.bahan}}</td>
@@ -528,7 +528,7 @@
                             {{san.nama}}
                         </span>
 <br>
-                   <img v-if="item.foto" :src="item.foto" alt="Girl in a jacket" width="500"> 
+                   <img v-if="item.foto" :src="item.foto" alt="Girl in a jacket" width="230"> 
                     
                 </b-card>
             </b-collapse>

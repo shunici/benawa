@@ -67,8 +67,10 @@
                <input type="text" v-if="index == show_input" v-model="spk.data[index].ukuranP"   style="width: 40%; display: inline;" @keyup.enter="update(index)">
                     <input type="text" v-if="index == show_input" v-model="spk.data[index].ukuranL"   style="width: 40%; display: inline;" @keyup.enter="update(index)">
             <span v-else>
-              <div class="ukuran" v-if="item.uk_alias"><b>{{item.uk_alias}}</b>  </div>
-              <div class="ukuran" v-else-if="item.ukuranP"> <b> {{item.ukuranP}} x {{item.ukuranL}} </b> </div>
+                  <div class="ukuran" v-if="item.uk_alias"><b>{{item.uk_alias}}</b>  </div>
+                  <div class="ukuran" v-else-if="item.ukuranP"> 
+                    <b> {{item.ukuranP}} <span  v-if="item.ukuranL"> x</span>  {{item.ukuranL}}    </b> 
+                  </div>
               </span>             
              </td>
 
@@ -149,10 +151,12 @@
                             </div>   
                     </div>         
           </div> 
-         <div v-for="(row, index) in spk.data" :key="'kets'+index" class="d-inline">
-            <div class="d-inline" v-if="row.nama_brg"> <span class="badge badge-dark">{{index+1}}</span> {{row.nama_brg}} |&ensp;</div>
+      
+            <span v-for="(row, index) in spk.data" :key="'kets'+index" class="col" > 
+              <span v-if="row.nama_brg" class="badge badge-dark">{{index+1}}    </span>   {{row.nama_brg}}
+           
+              </span>
 
-          </div>
 
           
     </div> 
@@ -419,7 +423,8 @@ moment.locale('id');
               reader.onload = (evt) => {
                 console.log(evt.target.result); // data url!
                   var posisi = prompt("Please enter your name:", 1);
-                 this.tampil[posisi] = evt.target.result
+                 this.tampil[posisi] = evt.target.result;
+                  this.spk.foto = evt.target.result;
               };
               reader.readAsDataURL(blob);
             }

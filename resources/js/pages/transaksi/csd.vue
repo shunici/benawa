@@ -165,7 +165,7 @@
                                                  <td v-if="data.nama_brg" scope="row">{{data.nama_brg}}</td>
                                                  <td v-if="data.nama_brg">{{data.bahan}}</td>
                                                  <td v-if="data.nama_brg">
-                                                   <span v-if="data.ukuranP">   {{data.ukuranP}} x {{data.ukuranL}}</span>
+                                                   <span v-if="data.ukuranP">   {{data.ukuranP}} <div v-if="data.ukuranL">x</div> {{data.ukuranL}}</span>
                                                    <span v-else>{{data.uk_alias}}</span>
                                                  </td>
                                                  <td v-if="data.nama_brg">{{data.qty}}</td>

@@ -182,14 +182,20 @@ import {mapActions, mapState, mapMutations} from 'vuex'
                     };
                     this.spk.user.push(kirim);                   
                     this.submit_spk();                    
-                     this.pesan_aktif = true;    
+                     this.pesan_aktif = true;  
+
+                     this.spk.label.warna = '',
+                     this.spk.label.nama = '',
+                     this.spk.status = 'cm',
+
                          setTimeout(()=>{
                         this.pesan();
                         },1000);                           
                     } else {alert('anda belum terdefinisi')}
                       
                       setTimeout(()=>{
-                               this.spk.user = [];                        
+                               this.spk.user = [];     
+
                         },1000);                                                                         
                 },
                 pesan(){                    
