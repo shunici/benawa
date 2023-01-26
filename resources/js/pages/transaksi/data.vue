@@ -137,7 +137,7 @@
           <b-button  aria-controls="collapse-1"  @click="visible = !visible"  variant="primary" class="float-right">{{visible ? "Sembunyi" : "Detail"}}</b-button>       
       </template>
       <b-collapse id="collapse-1"  v-model="visible" >
-       <draggable v-model="item_cm"  group="items" v-bind="dragOptions" @change="log">
+       <draggable v-model="item_cm"  group="items" v-bind="dragOptions">
         <div v-for="(item, index) in cm" :key="index + 'cm'" >
             <td class="list-group-item list-group-item-action  text-left m-0 table-hover"  
               v-b-toggle="index+'cm'">          
@@ -273,7 +273,7 @@
           <b-button  aria-controls="collapse-1"  @click="visible = !visible"  variant="primary" class="float-right">{{visible ? "Sembunyi" : "Detail"}}</b-button>       
       </template>
       <b-collapse id="collapse-1"  v-model="visible" >
-       <draggable v-model="item_cp"  group="items" v-bind="dragOptions" @change="log">
+       <draggable v-model="item_cp"  group="items" v-bind="dragOptions">
         <div v-for="(item, index) in cp" :key="index + 'cp'" >
             <td class="list-group-item list-group-item-action  text-left m-0 table-hover"  
               v-b-toggle="index+'cp'">          
@@ -410,7 +410,7 @@
 
       </template>
       <b-collapse id="collapse-1"  v-model="visible" >
-       <draggable v-model="item_cs"  group="items" v-bind="dragOptions" @change="log">
+       <draggable v-model="item_cs"  group="items" v-bind="dragOptions">
         <div v-for="(item, index) in cs" :key="index + 'cs'" >
             <td class="list-group-item list-group-item-action  text-left m-0 table-hover"  
               v-b-toggle="index+'cs'">          
@@ -545,7 +545,10 @@
     </b-card> <!-- cs -->
   </b-card-group>
 
-
+ <b-button class="float-right btn btn-success" @click="log">
+                            <b-icon icon="inbox-fill"></b-icon> Simpan
+                          </b-button>
+<b-icon v-if="refresh_aktif" class="float-right" icon="arrow-clockwise" animation="spin-pulse" font-scale="3"></b-icon>
 
     </div>
 </template>
@@ -830,21 +833,22 @@ export default {
                         nama_pemesan: todo2.nama_pemesan,
                         status : 'cs'
                     }
-                });   let post_csd = {};
-
-                post_csd.csd = this.csd.map( (todo2, index) => {
-                    return {
-                        id : todo2.id,
-                        posisi: index,
-                        nama_pemesan: todo2.nama_pemesan,
-                        status : 'csd'
-                    }
-                });    
+                });  
+                
+                // let post_csd = {};
+                // post_csd.csd = this.csd.map( (todo2, index) => {
+                //     return {
+                //         id : todo2.id,
+                //         posisi: index,
+                //         nama_pemesan: todo2.nama_pemesan,
+                //         status : 'csd'
+                //     }
+                // });    
                   let list1 = post_cm.cm;
                   let list2 = post_cp.cp;
                   let list3 = post_cs.cs;
-                  let list4 = post_csd.csd;
-                  let gabungan = list1.concat(list2, list3, list4);
+                  // let list4 = post_csd.csd;
+                  let gabungan = list1.concat(list2, list3);
           
                   //pengabungan semua
                   let gabung = {};
@@ -856,7 +860,13 @@ export default {
                         status : tes.status
                     }
                   })                                                  
+                   
+                    
+              this.refresh_aktif = true;
+              setTimeout(function () {                      
                     this.gabung_spk(gabung)
+                        this.refresh_aktif = false;
+                        }.bind(this), 2000)
                                                 
             },   
             query_kategori(event)  {

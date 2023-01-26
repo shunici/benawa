@@ -12,6 +12,7 @@ use App\Http\Resources\spkCollection;
 
 class spkController extends Controller
 {
+      
     public function index(Request $request)
     {
         $kategori = request()->kategori;

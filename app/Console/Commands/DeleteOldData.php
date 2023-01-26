@@ -39,8 +39,8 @@ class DeleteOldData extends Command
      */
     public function handle()
     {
-        spk::where('created_at', '<', Carbon::now()->subWeek(16))->delete();
-        $name = $this->info('data 120 hari dihapus');
+        spk::where('created_at', '<', Carbon::now()->subWeek(2))->delete();
+        $name = $this->info('data 14 hari dihapus');
     }
 }
 

@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
       
-        $schedule->command('delete:data')->monthly();
+        $schedule->command('delete:data')->weekly();
 
     }
 
