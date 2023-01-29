@@ -15,6 +15,7 @@
     <script src="https://cdn.rawgit.com/seikichi/tiff.js/master/tiff.min.js"></script>
     <script src="https://cdn.rawgit.com/rfvallina/Misc/master/pdf.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    
 </head>
 </head>
 <body>

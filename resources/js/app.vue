@@ -15,11 +15,34 @@ import footerComponent from './components/footerComponent.vue';
 import headerComponent from './components/headerComponent.vue';
 import MarqueData from './components/marqueData.vue'
 import { mapActions, mapState } from 'vuex'
+let ROOT_PATH = 'https://raw.githubusercontent.com/shunici/behabarusaha/main/blogbehabar/youreinvited.jpg'
 
     export default {
        components : {
            headerComponent, footerComponent, MarqueData
        },  
+      data(){
+          return {
+                logo: ROOT_PATH,
+          }
+      },
+      metaInfo() {
+    return {
+      meta: [
+        // Twitter Card
+        {name: 'twitter:card', content: 'summary'},
+        {name: 'twitter:title', content: 'Vue Social Cards Example'},
+        {name: 'twitter:description', content: 'Vue sample site showing off Twitter and Facebook Cards.'},
+        {name: 'twitter:image', content: this.logo},
+        // Facebook OpenGraph
+        {property: 'og:title', content: 'Vue Social Cards Example'},
+        {property: 'og:site_name', content: 'Vue Example'},
+        {property: 'og:type', content: 'website'},
+        {property: 'og:image', content:  this.logo},
+        {property: 'og:description', content: 'Vue sample site showing off Twitter and Facebook Cards.'}
+      ]
+    }
+  },
        created () {
               this.get_spk();                   
             this.get_agenda(); 
@@ -28,6 +51,7 @@ import { mapActions, mapState } from 'vuex'
                     this.get_info();  
                 this.get_karyawan();
                 this.get_warna();
+                
             
        },   
 
@@ -52,7 +76,7 @@ import { mapActions, mapState } from 'vuex'
          ...mapActions('label_stores', ['get_label']),  
             ...mapActions('spk_stores', ['get_spk', 'get_warna']),    
       
-    }
+    },
 
     }
 </script>

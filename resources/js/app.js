@@ -21,6 +21,10 @@ import 'vue-select/dist/vue-select.css';
 import Vue2Editor from "vue2-editor";
 Vue.use(Vue2Editor);
 
+import Meta from 'vue-meta';
+Vue.use(Meta);
+
+
 import router from './router.js'
 import App from './app.vue';
 import store from './store'
