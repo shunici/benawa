@@ -26,23 +26,6 @@ let ROOT_PATH = 'https://raw.githubusercontent.com/shunici/behabarusaha/main/blo
                 logo: ROOT_PATH,
           }
       },
-      metaInfo() {
-    return {
-      meta: [
-        // Twitter Card
-        {name: 'twitter:card', content: 'summary'},
-        {name: 'twitter:title', content: 'Vue Social Cards Example'},
-        {name: 'twitter:description', content: 'Vue sample site showing off Twitter and Facebook Cards.'},
-        {name: 'twitter:image', content: this.logo},
-        // Facebook OpenGraph
-        {property: 'og:title', content: 'Vue Social Cards Example'},
-        {property: 'og:site_name', content: 'Vue Example'},
-        {property: 'og:type', content: 'website'},
-        {property: 'og:image', content:  this.logo},
-        {property: 'og:description', content: 'Vue sample site showing off Twitter and Facebook Cards.'}
-      ]
-    }
-  },
        created () {
               this.get_spk();                   
             this.get_agenda(); 
@@ -76,7 +59,32 @@ let ROOT_PATH = 'https://raw.githubusercontent.com/shunici/behabarusaha/main/blo
          ...mapActions('label_stores', ['get_label']),  
             ...mapActions('spk_stores', ['get_spk', 'get_warna']),    
       
-    },
+    }, metaInfo() {
+    const a = "test";
+    return {
+      title: "test meta data with vue",
+      meta: [
+        ...(a === "test" && [
+          {
+            vmid: "ab",
+            name: "nam",
+            content:
+              "hello world, this is an example of adding a description with vue-meta"
+          },
+           {property: 'og:image', content:  this.logo},
+        ])
+      ],
+			script: [
+        { src: '<https://services.postcodeanywhere.co.uk/js/address-3.91.js>', async: true, defer: true, body: true }
+      ],
+			link: [
+        {
+          rel: 'canonical',
+          href: '<https://malikgabroun.com/>'
+        }
+			]
+    };
+  }
 
     }
 </script>
