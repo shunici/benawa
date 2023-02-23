@@ -76,6 +76,15 @@
                         <input   v-model="form.kategori"  class="form-check-input" type="radio" name="kategori" id="" value="Merchandise"> Merchandise
                     </label>
                     </div>   
+                                    
+                    <div class="form-group">
+                    <label class="form-check-label">
+                        <input   @change="uploadImage($event)"    class="form-check-input" type="file" name="kategori" id="" value="foto"> Foto Produk
+                    </label>
+                    </div>  
+                    <div class="form-group">
+                        <img width="200" v-if="tampil_foto" :src="tampil_foto" />
+                    </div>
 
              <div class="form-group">                        
                 <label for="">Keterangan</label>
@@ -117,8 +126,10 @@ name : 'formProduk',
                   kategori : res.data.kategori,
                   bahan :  res.data.bahan ? JSON.parse(res.data.bahan) : [],
                   ket :  res.data.ket ? JSON.parse(res.data.ket) : [],
-                  info_produk : res.data.info_produk
+                  info_produk : res.data.info_produk,
+                  foto : res.data.foto
               }
+              this.tampil_foto = '/storage/produk/' +  res.data.foto
           } )
         }
     },
@@ -135,9 +146,10 @@ name : 'formProduk',
           kategori : '',
           bahan : [], 
           ket : [],
-          info_produk : ''
-
+          info_produk : '',
+          foto : ''
         },       
+         tampil_foto : '',
         show: true,      
         pesan : false
       }
@@ -153,6 +165,10 @@ name : 'formProduk',
        ...mapMutations('produk_stores', ['SET_ID_UPDATE']),
       ...mapActions('produk_stores', ['submit_data_produk', 'update_data_produk', 'edit_data_produk']),
         ...mapActions('bahan_stores', ['get_data_bahan', ]),
+        uploadImage(event){     
+                        this.form.foto = event.target.files[0];                     
+                        this.tampil_foto = URL.createObjectURL(this.form.foto);
+            },
         tambah(){ 
           this.form.bahan.push({
             id : this.terpilih_bahan.id, nama : this.terpilih_bahan.nama, panjang : this.terpilih_bahan.panjang, lebar : this.terpilih_bahan.lebar, uk_alias : this.terpilih_bahan.uk_alias, kategori : this.terpilih_bahan.kategori
@@ -179,6 +195,7 @@ name : 'formProduk',
         form.append('lebar', this.form.lebar);
         form.append('uk_alias', this.form.uk_alias);
          form.append('kategori', this.form.kategori);
+          form.append('foto', this.form.foto);
         form.append('bahan', konver_bahan);
         form.append('ket', konver_ket);
             form.append('info_produk', this.form.info_produk);

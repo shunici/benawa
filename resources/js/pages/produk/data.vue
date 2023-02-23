@@ -113,6 +113,13 @@
                     
                                     <b-button class="float-right" size="sm" @click="row.toggleDetails">Senyapkan</b-button>                          
                                 </template>
+                                
+                                    <template #cell(foto)="row">
+                                        <div :key="'ft'+row.index">
+                                             <img width="30" v-if="row.item.foto" :src=" '../storage/produk/'+ row.item.foto " />
+                                             
+                                        </div>
+                                    </template> 
                                  </b-table>                                         
 
 
@@ -154,6 +161,7 @@ export default {
                 {key: 'bahan', label : 'Bahan', sortable: true, visible: true},
                  {key : 'show_details', label :'Info Produk', sortable:true, visible: true, visible: true},
                  {key: 'ket', label : 'Keterangan', sortable: true, visible: true},
+                 {key: 'foto', label : 'Foto', sortable: true, visible: true},
                 {key: 'aksi',  label : 'Aksi', sortable: false, visible: false}, //TAMBAHKAN CODE INI
             ],
             searching: '',
