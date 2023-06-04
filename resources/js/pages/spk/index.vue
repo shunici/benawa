@@ -160,7 +160,8 @@ import {mapActions, mapState, mapMutations} from 'vuex'
                          label : o.nama,
                          code : index,
                          nama_asli : o.nama_asli,
-                         telpon : o.telpon
+                         telpon : o.telpon,
+                           id_kostumer : o.id_kostumer
                      }
                   
                 }); 

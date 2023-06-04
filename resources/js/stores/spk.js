@@ -24,6 +24,7 @@ const state = () => ({
         },
         user : [], // [{nama : '', ket : '', waktu : ''}]
         desainer : '',
+        id_kostumer : '',
         no_wa : '',
         kategori : 'Outdoor',
         posisi : '',        
@@ -41,10 +42,8 @@ const state = () => ({
         waktu : true,
         estimasi :true,
         
-      },
-      
+      },      
       uk_font : 0.8,
-
       options: [
         {label : 'spanduk',  code : '300x500', pesan: 'shun'},
         {label : 'spandcode',  code : '300x500', pesan :'sdfsdf'}
@@ -65,9 +64,10 @@ const state = () => ({
         default : 'fr280'
       },
       query : {
+        id_kostumer : '',
         kategori : 'Outdoor',
         desainer : '',
-        status : '',
+        status : 'cm',
         tgl1 : '',
         tgl2 : '',
       }, //query kategori
@@ -122,6 +122,7 @@ const mutations = {
       },
       user : payload.user,
       desainer : payload.desainer, 
+      id_kostumer : payload.id_kostumer,
       no_wa : payload.no_wa,
       kategori : payload.kategori,
       posisi : payload.posisi,        
@@ -231,7 +232,8 @@ const actions = {
               mulai_tgl : state.mulai_tgl,
               akhir_tgl : state.akhir_tgl,                
               page : state.currentPage, 
-              per_page: state.perPage,                       
+              per_page: state.perPage,  
+              id_kostumer: state.query.id_kostumer,                       
             }
           })
           .then((response) => {                         

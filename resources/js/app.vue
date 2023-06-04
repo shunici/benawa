@@ -1,11 +1,11 @@
 <template>
     <div>
-     <headerComponent></headerComponent>   
-     <marque-data></marque-data>      
+     <headerComponent v-if="route_skr != 'kostumer' "></headerComponent>   
+     <marque-data v-if="route_skr != 'kostumer' "></marque-data>      
    <div class="container-fluid">
           <router-view></router-view>
    </div>
-    <footer-component></footer-component>
+    <footer-component v-if="route_skr != 'kostumer' "></footer-component>
          
     </div>
 </template>
@@ -34,7 +34,7 @@ let ROOT_PATH = 'https://raw.githubusercontent.com/shunici/behabarusaha/main/blo
                     this.get_info();  
                 this.get_karyawan();
                 this.get_warna();
-                
+               
             
        },   
 
@@ -48,7 +48,10 @@ let ROOT_PATH = 'https://raw.githubusercontent.com/shunici/behabarusaha/main/blo
             }),
         ...mapState('info_stores', {
                 infos : state=> state.infos
-            }),
+            }), 
+          route_skr() {
+        return this.$route.name;
+        }
 
     },
     methods : {

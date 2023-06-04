@@ -21,6 +21,7 @@
 
             <router-link class="nav-item nav-link" :to=" {name: 'transaksi.data' } ">Data</router-link>
                <router-link class="nav-item nav-link" :to=" {name: 'transaksi.csd' } ">CSD</router-link>
+                              <router-link class="nav-item nav-link" :to=" {name: 'kostumer' } ">kostumer</router-link>
 
 
 

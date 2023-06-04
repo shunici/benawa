@@ -84,6 +84,7 @@ export default {
     data() {
         return {
             fields: [
+                 {key: 'id', sortable: true},
                 {key: 'nama', sortable: true},
                 {key: 'inisial', sortable: true},
                 {key: 'kategori', sortable: true},

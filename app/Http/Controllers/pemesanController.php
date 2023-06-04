@@ -37,6 +37,7 @@ class pemesanController extends Controller
                         'nama' => $array[$i][$a]['nama'],
                         'nama_asli' => $array[$i][$a]['nama_asli'],
                         'telpon' => $array[$i][$a]['telpon'],
+                        'id_kostumer' => $array[$i][$a]['id_kostumer'],
                     );
             }
         }                
@@ -61,8 +62,11 @@ class pemesanController extends Controller
             $pemesan = pemesan::orderBy('created_at', 'desc')->latest()->first();
             $objek = [];
             foreach($inisial as $row){
-                $objek[] = array( 'nama_asli' => $request->nama,
-                    'nama' => $row['nama'], 'telpon' => $request->telpon,
+                $objek[] = array( 
+                    'nama_asli' => $request->nama,
+                    'nama' => $row['nama'], 
+                    'telpon' => $request->telpon,
+                    'id_kostumer' => $pemesan->id,
                 );
             }
             $json = json_encode($objek); //konversi data inisial supaya bisa save ke DB
@@ -96,8 +100,11 @@ class pemesanController extends Controller
             $inisial = $request->inisial;
             $objek = [];
             foreach($inisial as $row){
-                $objek[] = array( 'nama_asli' => $request->nama,
-                'nama' => $row['nama'], 'telpon' => $request->telpon,
+                $objek[] = array( 
+                    'nama_asli' => $request->nama,
+                'nama' => $row['nama'], 
+                'telpon' => $request->telpon,
+                'id_kostumer' => $id,
             );
             }
             $json = json_encode($objek); //konversi data inisial supaya bisa save ke DB                       

@@ -21,9 +21,20 @@ class spkController extends Controller
         }else{
             $spk = spk::orderBy('posisi', 'ASC'); 
         }
+
         $status = request()->status;        
         if($status == "csd") {
             $spk = $spk->where('status', $status);
+        }
+
+        $status_cm = request()->status;        
+        if($status_cm == "cm") {
+            $spk = $spk->where('status', $status);
+        }
+
+        $id_kostumer = request()->id_kostumer;        
+        if($id_kostumer != '') {
+            $spk = $spk->where('id_kostumer', $id_kostumer);
         }
 
         $no_nota = request()->no_nota;             
@@ -201,4 +212,17 @@ class spkController extends Controller
         $data->delete();  
         return response()->json(['status' => 'success'], 200);
     }
+    public function kostumer($id)
+    {
+        
+        $data = spk::firstWhere('pemesan', $id);
+        if(!$data) {
+          $data = spk::findOrFail($id);
+        }
+        return response()->json([
+          'status' => 'success',
+          'data' => $data      
+           ], 200);
+    }
+   
 }

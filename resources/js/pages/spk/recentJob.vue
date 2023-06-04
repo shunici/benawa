@@ -74,17 +74,20 @@
       <label for="tel">No Telp</label> <button class="float-right btn btn-sm" @click="clear_phone">Clear Phone</button>
       <input type="text" class="form-control" v-model="spk.no_wa">
     </div>
+    
+    <div class="form-group">
+      <label for="id">Id Kostumer</label> 
+      <input type="text" class="form-control" v-model="spk.id_kostumer">
+    </div>
 
     <span>  
 
     <div class="form-check form-check-inline" v-for="(item, index) in nama_array" :key="index+'labl'">
       <label class="form-check-label" v-on:change="cari_array_nama($event)">
-        <input class="form-check-input"  type="radio" name="label" :id="item.nama" :value="item.telpon"> <span class="text-uppercase">{{item.nama}}</span>
+        <input class="form-check-input"  type="radio" :name="item.id" :id="item.nama" :value="item.id_kostumer"> <span class="text-uppercase">{{item.nama}}</span>
       </label>
     </div>  
     </span>
-    
-
   </div>
 </div>
 
@@ -166,6 +169,7 @@ import { mapActions, mapState, mapMutations } from 'vuex'
 
             //khusus gambar drop
               onChange() {
+              
                 this.spk.user = [];
                this.filelist = [...this.$refs.file.files];               
                       
@@ -178,7 +182,9 @@ import { mapActions, mapState, mapMutations } from 'vuex'
                         if(nm.includes(nama_pemesan)){
                              this.nama_array.push({
                               nama : sis.nama_asli,
-                              telpon : sis.telpon
+                               id_kostumer : sis.id_kostumer,
+                              telpon : sis.telpon,
+                             
                            }); 
                         }
                         //label nama inisial, nama asli artinya nama yang benar
@@ -217,10 +223,12 @@ import { mapActions, mapState, mapMutations } from 'vuex'
              
             },  
          cari_array_nama: function(e){
-            var telpon = e.target.value;
-            var nama = e.target.id;
+            // var telpon = e.target.value; 
+            var id = e.target.value; 
+            var nama = e.target.id;        
             this.spk.nama_pemesan = nama;
-            this.spk.no_wa = telpon;                          
+            // this.spk.no_wa = telpon; 
+             this.spk.id_kostumer = id;                          
         },  
         clear_phone(){
           this.spk.no_wa = "";

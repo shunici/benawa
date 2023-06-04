@@ -37,7 +37,7 @@ import transaksi_data from './pages/transaksi/data.vue'
 import transaksi_csd from './pages/transaksi/csd.vue'
 import transaksi_edit from './pages/transaksi/edit.vue'
 
-
+import kostumer from './pages/kostumer/kostumer.vue'
 
 import indexLabel from './pages/labelCetak/index.vue'
 import dataLabel from './pages/labelCetak/data.vue'
@@ -79,6 +79,13 @@ const routes = [
         component: agenda,   
         meta: { title: 'Agenda' }                    
     },    
+    
+    {
+        path: '/kostumer/:id_kostumer?',
+        name: 'kostumer',
+        component: kostumer,
+        meta: { title: 'data kostumer' }
+    },
     {
         path: '/karyawan',
         name: 'karyawan',
