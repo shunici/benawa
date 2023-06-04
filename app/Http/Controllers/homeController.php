@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\produk;
 use App\pemesan;
 use File;
+use Carbon\Carbon;
 class homeController extends Controller
 {
   public function index(Request $request)
@@ -22,12 +23,13 @@ class homeController extends Controller
            $post_id = str_replace('kostumer/', '', $path); 
           $post = pemesan::find($post_id);
        
-            if ($post) {      
+            if ($post) {   
+              $date = Carbon::now();         
               $meta = [       
               "title" => $post->nama,    
-              "description" => $post->kategori,     
+              "description" => 'Data Cetakan Masuk Hari'.  Carbon::parse($date)->isoFormat('dddd, D MMMM Y'),    
               "url" => 'https://benawa.link' . '/'. $path,   
-              // "image" => 'https://benawa.link'. '/storage/produk/'. $post->foto    
+              "image" => 'https://shunici.github.io/program_hitung/png_benawa.png'
               ];   
               
           }

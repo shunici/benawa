@@ -1,6 +1,6 @@
 
 <template>
-    <div class="container mt-3">    
+    <div class="mt-3">    
         <h1>{{nama_pemesan}}</h1>         
                 <div class="row">  
                     <!-- <div class="col-md ">                   
@@ -103,7 +103,7 @@
                     <div class="card-header">
                         <h4 class="card-title text-uppercase"><b>Cetakan Masuk (CM) {{query.kategori ? query.kategori : "semua kategori" }}</b> </h4>                        
                     </div>
-                    <div class="card-body">
+                   
 
                            <b-table striped hover responsive  bordered :items="spks.data" :fields="visibleFields" show-empty>
                                  
@@ -150,7 +150,7 @@
                 </thead>               
               </table> 
 
-                                     <table class="table">
+                                     <table class="table" style="font-size: 8px;">
                                          <thead>
                                              <tr>
                                                  <th>No</th>
@@ -211,12 +211,11 @@
                             </div>
                     </div>
                 </div>              
-            </div>   
-                <!-- //tutup card -->              
+                  
         </div>
         <!-- //tutup row -->
       
-
+    <p><i>Created by shunici</i></p>
     </div>
 </template>
 <script>
@@ -238,7 +237,7 @@ export default {
             nama_pemesan : '',
             fields: [                
                 {key: 'cetakan_masuk', label : 'CM', sortable: true , visible: true},   
-                {key: 'tgl', label : 'Tgl Msk', sortable: true, visible: true}, 
+                {key: 'tgl', label : 'Tgl', sortable: true, visible: true}, 
                 {key: 'kategori', label : 'Kategori', sortable: true, visible: true},                        
                 {key : 'show_details', label :'Detail', sortable:true, visible: true},
                 {key: 'aksi', label : 'aksi', sortable: false, visible: true}, 
@@ -318,7 +317,7 @@ export default {
         }, 
         tgl_show(data)  {
                 var tgl = data? data : moment();
-            return moment(tgl).format('ddd, DD-MMM-YY');
+            return moment(tgl).format('D-M-Y');
          },         
         waktu_show(data)  {
                 var tgl = data? data : moment();
