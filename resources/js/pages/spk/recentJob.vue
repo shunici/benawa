@@ -84,7 +84,8 @@
 
     <div class="form-check form-check-inline" v-for="(item, index) in nama_array" :key="index+'labl'">
       <label class="form-check-label" v-on:change="cari_array_nama($event)">
-        <input class="form-check-input"  type="radio" :name="item.id" :id="item.nama" :value="item.id_kostumer"> <span class="text-uppercase">{{item.nama}}</span>
+        <input class="form-check-input"  type="radio" name="nama_perc" :id="item.nama" :value="item.id_kostumer"> <span class="text-uppercase">{{item.nama}}</span>
+        <span class="badge badge-warning"> {{item.id_kostumer}}</span>
       </label>
     </div>  
     </span>
@@ -169,9 +170,10 @@ import { mapActions, mapState, mapMutations } from 'vuex'
 
             //khusus gambar drop
               onChange() {
-              
+              this.spk.id_kostumer = '';
                 this.spk.user = [];
-               this.filelist = [...this.$refs.file.files];               
+               this.filelist = [...this.$refs.file.files];   
+
                       
                       //untuk perncarian nama dan push array nama radio buton
                       this.nama_array = []; //kosongkan dulu arraynya

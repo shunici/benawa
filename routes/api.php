@@ -77,6 +77,7 @@ Route::post('/spk-updatelabel', 'spkController@updatelabel');
 Route::get('/ambil-warna', 'spkController@color');
 Route::post('/spk/csd/{id}', 'spkController@csd');
 Route::post('/spk/cs/{id}', 'spkController@cs');
+Route::post('/spk/cm/{id}', 'spkController@cm');
 Route::post('/spk-handlespk/{id}', 'spkController@handlespk');
 Route::get('/query_data', 'spkController@queriData');
 Route::post('/jadikan-csd', 'spkController@jadikancsd');

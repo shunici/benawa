@@ -26,6 +26,7 @@
     "dependencies": {
         "bootstrap-vue": "^2.21.2",
         "moment": "^2.29.1",
+        "sweetalert2": "^11.7.10",
         "vue-media-recorder": "^0.1.25",
         "vue-meta": "^2.4.0",
         "vue-router": "^3.5.1",

@@ -179,6 +179,16 @@ class spkController extends Controller
         }
         return response()->json(['status' => 'success'], 200);
     }
+    
+    public function cm($id)
+    {
+        $data = spk::findOrFail($id);
+        if($data) {         
+            $data->status = 'cm'; 
+            $data->save(); 
+        }
+        return response()->json(['status' => 'success'], 200);
+    }
 
     public function handlespk(Request $request, $id)    {
                                                 

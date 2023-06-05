@@ -20,7 +20,7 @@ class DeleteOldData extends Command
      *
      * @var string
      */
-    protected $description = 'menghapus data dalam waktu 120 hari';
+    protected $description = 'menghapus data dalam waktu 4 hari';
 
     /**
      * Create a new command instance.
@@ -39,8 +39,8 @@ class DeleteOldData extends Command
      */
     public function handle()
     {
-        spk::where('created_at', '<', Carbon::now()->subWeek(2))->delete();
-        $name = $this->info('data 14 hari dihapus');
+        spk::where('created_at', '<', Carbon::now()->subDay(4))->delete();
+        $name = $this->info('data 4 hari dihapus');
     }
 }
 

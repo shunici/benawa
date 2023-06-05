@@ -27,16 +27,27 @@ let ROOT_PATH = 'https://raw.githubusercontent.com/shunici/behabarusaha/main/blo
           }
       },
        created () {
-              this.get_spk();                   
-            this.get_agenda(); 
-            this.get_alert();  
-            this.get_label();  
-                    this.get_info();  
-                this.get_karyawan();
-                this.get_warna();
+              // this.get_spk();                   
+
                
             
        },   
+       
+    mounted(){
+      //utk tidak membebani buhan percetakan ngecek di hape terlalu banyak load
+           setTimeout(function () {
+             if(this.route_skr != 'kostumer') {           
+                  this.get_agenda(); 
+                this.get_alert();  
+                this.get_label();  
+                this.get_info();  
+                this.get_karyawan();
+                this.get_warna();
+                this.get_spk(); 
+             }                
+                
+            }.bind(this), 2000)
+    },
 
     computed : {
         ...mapState('karyawan_stores', {

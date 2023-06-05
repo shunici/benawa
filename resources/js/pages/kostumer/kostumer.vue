@@ -6,8 +6,8 @@
                     <!-- <div class="col-md ">                   
                         <input type="text" v-model="searching" class="form-control" placeholder="Pencarian kostumer......">
                     </div>   -->
-                     <b-button v-b-toggle.collapse-3 class="m-1">Detil</b-button>
-                    <b-collapse visible id="collapse-3">                     
+                       <b-button v-b-toggle.collapse-2 class="m-1">Filter</b-button>
+                    <b-collapse id="collapse-2">                     
                                   
                                         <div class="form-inline">
                                             <label class="mr-2">Tampil</label>
@@ -188,6 +188,7 @@
                                 <template #cell(aksi)="row">
                                     <div :key="row.index">
                                         <button v-if="query.status == 'cm' " class="btn btn-success btn-sm" @click="csd_set(row.item.id)"> Ubah Status</button>                                                                                
+                                        <button v-if="query.status == 'csd' " class="btn btn-success btn-sm" @click="cm_set(row.item.id)"> Ubah Status</button>           
                                     </div>
                                 </template>                              
 
@@ -215,10 +216,11 @@
         </div>
         <!-- //tutup row -->
       
-    <p><i>Created by shunici</i></p>
+    <p><i>Data Automatis Terhapus setelah 3 hari. Kritik Saran Hubungi Shun</i></p>
     </div>
 </template>
 <script>
+import Swal from 'sweetalert2'
 
 import moment from "moment"
 moment.locale('id'); 
@@ -230,7 +232,13 @@ export default {
          this.edit_data_pemesan(this.$route.params.id_kostumer).then( (res) => {
              this.nama_pemesan = res.data.nama;
           } )
-        this.get_spk();              
+            
+    },
+    mounted(){
+           setTimeout(function () {
+               this.get_spk();  
+               
+            }.bind(this), 900)
     },
     data() {
         return {
@@ -299,7 +307,7 @@ export default {
     },
     methods : {
         ...mapActions('pemesan_stores', ['edit_data_pemesan']),
-        ...mapActions('spk_stores', ['get_spk', 'spk_csd', 'edit_spk', 'remove_spk']),              
+        ...mapActions('spk_stores', ['get_spk', 'spk_csd','spk_cm' , 'edit_spk', 'remove_spk']),              
         mulai_tgl(param){
           this.$store.state.spk_stores.mulai_tgl = param
           this.get_spk()
@@ -324,14 +332,37 @@ export default {
             return moment(tgl).format('LLLL');
          }, 
         csd_set(param){                                        
-              let person = prompt("Ubah jadi Cetakan sudah diambil ? :", "ya");
-              if (person == null || person == "") {
-               
-              } else {
-                 this.spk_csd(param);             
-                 
-              }             
-        },  
+            Swal.fire({
+            title: 'Pindahkan Cetakan',
+            text: "Ke Cetakan Sudah Diambil",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oke, Pindahkan!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+               this.spk_csd(param);   
+            }
+            })
+             
+        },   
+        cm_set(param){                                        
+            Swal.fire({
+            title: 'Pindahkan Cetakan',
+            text: "Ke Cetakan Masuk",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oke, Pindahkan!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+               this.spk_cm(param);   
+            }
+            })
+             
+        }, 
         pkl_show (data){          
             var tgl = data? data : '';
             if(tgl) {

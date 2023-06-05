@@ -65,7 +65,7 @@ const state = () => ({
       },
       query : {
         id_kostumer : '',
-        kategori : 'Outdoor',
+        kategori : '',
         desainer : '',
         status : 'cm',
         tgl1 : '',
@@ -256,6 +256,15 @@ const actions = {
   spk_cs({dispatch }, payload) {
     return new Promise((resolve, reject) => {
         axios.post(`/api/spk/cs/${payload}`)
+        .then((response) => {                       
+             dispatch('get_spk');
+            resolve(response.data)
+        })
+    })
+  },  
+  spk_cm({dispatch }, payload) {
+    return new Promise((resolve, reject) => {
+        axios.post(`/api/spk/cm/${payload}`)
         .then((response) => {                       
              dispatch('get_spk');
             resolve(response.data)
