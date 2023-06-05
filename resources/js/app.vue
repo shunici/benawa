@@ -76,7 +76,7 @@ let ROOT_PATH = 'https://raw.githubusercontent.com/shunici/behabarusaha/main/blo
     }, metaInfo() {
     const a = "test";
     return {
-      title: "test meta data with vue",
+      title: "SPK Benawa Printing",
       meta: [
         ...(a === "test" && [
           {

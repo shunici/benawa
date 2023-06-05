@@ -35,6 +35,18 @@
                                             <label for="example-datepicker2">Akhir Tanggal</label>
                                             <b-form-datepicker id="example-datepicker2" @input="akhir_tgl" class="mb-2" locale="id"></b-form-datepicker>
                                         </div>
+                                         <b-form-group class="text-center">
+                                                    <b-form-checkbox
+                                                    :disabled="visibleFields.length == 1 && field.visible"
+                                                    v-for="field in fields" 
+                                                    v-model="field.visible" 
+                                                    :key="field.key"           
+                                                    name="flavour-4a"
+                                                    inline
+                                                    class="text-center">
+                                                                {{ field.label }}
+                                                            </b-form-checkbox>
+                                                    </b-form-group>
                                  
                                     
                     </b-collapse>                
@@ -68,18 +80,7 @@
 
                     </div>
 
-                <b-form-group class="text-center">
-                <b-form-checkbox
-                :disabled="visibleFields.length == 1 && field.visible"
-                v-for="field in fields" 
-                v-model="field.visible" 
-                :key="field.key"           
-                name="flavour-4a"
-                inline
-                class="text-center">
-                            {{ field.label }}
-                        </b-form-checkbox>
-                </b-form-group>
+               
                         <div class="col-md text-center">
                                                                                      
                     <div class="form-check form-check-inline mt-2">
@@ -101,7 +102,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title text-uppercase"><b>Cetakan Masuk (CM) {{query.kategori ? query.kategori : "semua kategori" }}</b> </h4>                        
+                        <h4 class="card-title text-uppercase"><b>Cetakan Masuk (CM) {{query.kategori ? query.kategori : "semua kategori" }}</b> </h4>   
+                        <h6>{{tanggal}}</h6>                     
                     </div>
                    
 
@@ -114,13 +116,16 @@
                                 </template>
                                  <template #cell(tgl)="row">
                                     <div :key="row.index">
-                                        {{tgl_show(row.item.tgl)}}
+                                        {{pukul_show(row.item.tgl)}}
                                     </div>
                                 </template>
 
                                  <template #cell(show_details)="row">
-                                    <b-button size="sm" @click="row.toggleDetails" class="mr-2">
-                                    {{ row.detailsShowing ? 'Senyapkan' : 'Tampilkan'}} Details
+                                    <b-button size="sm" @click="row.toggleDetails" class="text-center">
+                                    <!-- {{ row.detailsShowing ? 'Senyapkan' : ''}} Details -->
+                                    <b-icon icon="grid">
+                                        
+                                    </b-icon>
                                     </b-button>
                                 </template>
 
@@ -187,8 +192,8 @@
                                 </template>
                                 <template #cell(aksi)="row">
                                     <div :key="row.index">
-                                        <button v-if="query.status == 'cm' " class="btn btn-success btn-sm" @click="csd_set(row.item.id)"> Ubah Status</button>                                                                                
-                                        <button v-if="query.status == 'csd' " class="btn btn-success btn-sm" @click="cm_set(row.item.id)"> Ubah Status</button>           
+                                        <button v-if="query.status == 'cm' " class="btn btn-success btn-sm" @click="csd_set(row.item.id)">   <b-icon icon="pencil-square"></b-icon></button>                                                                                
+                                        <button v-if="query.status == 'csd' " class="btn btn-success btn-sm" @click="cm_set(row.item.id)"> <b-icon icon="pencil-square"></b-icon></button>           
                                     </div>
                                 </template>                              
 
@@ -242,10 +247,11 @@ export default {
     },
     data() {
         return {
+            tanggal : moment().format('dddd, DD-MMM-YYYY'),  
             nama_pemesan : '',
             fields: [                
                 {key: 'cetakan_masuk', label : 'CM', sortable: true , visible: true},   
-                {key: 'tgl', label : 'Tgl', sortable: true, visible: true}, 
+                {key: 'tgl', label : 'Pkl', sortable: true, visible: true}, 
                 {key: 'kategori', label : 'Kategori', sortable: true, visible: true},                        
                 {key : 'show_details', label :'Detail', sortable:true, visible: true},
                 {key: 'aksi', label : 'aksi', sortable: false, visible: true}, 
@@ -323,10 +329,11 @@ export default {
         query_status(event)  {            
             this.get_spk();
         }, 
-        tgl_show(data)  {
+        pukul_show(data)  {
                 var tgl = data? data : moment();
-            return moment(tgl).format('D-M-Y');
-         },         
+            return moment(tgl).format('h:mm');
+         },   
+               
         waktu_show(data)  {
                 var tgl = data? data : moment();
             return moment(tgl).format('LLLL');

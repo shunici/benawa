@@ -27,9 +27,9 @@ class homeController extends Controller
               $date = Carbon::now();         
               $meta = [       
               "title" => $post->nama,    
-              "description" => 'Data Cetakan Masuk Hari'.  Carbon::parse($date)->isoFormat('dddd, D MMMM Y'),    
+              "description" => 'Data Cetakan Masuk Hari '.  Carbon::parse($date)->isoFormat('dddd, D MMMM Y'),    
               "url" => 'https://benawa.link' . '/'. $path,   
-              "image" => 'https://shunici.github.io/program_hitung/png_benawa.png'
+              "image" => 'https://raw.githubusercontent.com/shunici/program_hitung/master/benawa.jpg'
               ];   
               
           }

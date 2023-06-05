@@ -21,9 +21,11 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{$meta['url']}}">
     <meta property="og:title" content="{{$meta['title']}}">
-    <meta property="og:description" content="{{$meta['title']}}">
-    {{-- <meta property="og:image" content="{{$meta['image']}}"> --}}
-
+    <meta property="og:description" content="{{$meta['description']}}">
+    <meta property="og:image" content="{{$meta['image']}}">
+{{-- sweet alert --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.10/dist/sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.10/dist/sweetalert2.min.css">
 </head>
 
 <body>
