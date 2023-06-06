@@ -116,7 +116,7 @@
                                 </template>
                                  <template #cell(tgl)="row">
                                     <div :key="row.index">
-                                        {{pukul_show(row.item.tgl)}}
+                                        {{pukul_show(row.item.created_at)}}
                                     </div>
                                 </template>
 
@@ -220,7 +220,32 @@
                   
         </div>
         <!-- //tutup row -->
-      
+        
+                                     <table class="table" style="font-size: 8px;" v-if="aktif">
+                                         <thead>
+                                             <tr>                                                 
+                                                 <th>Nama Barang</th>
+                                                 <th>Bahan</th>
+                                                 <th>Ukuran</th>
+                                                 <th>QTY</th>
+                                                 <td>Ket</td>
+                                             </tr>
+                                         </thead>
+                                         <tbody>
+                                             <tr v-for="(data, index) in array_spks" :key="index">                                                  
+                                                 <td v-if="data.nama_brg" scope="row">{{data.nama_brg}}</td>
+                                                 <td v-if="data.nama_brg">{{data.bahan}}</td>
+                                                 <td v-if="data.nama_brg">
+                                                   <span v-if="data.ukuranP">   {{data.ukuranP}} <span v-if="data.ukuranL">x</span> {{data.ukuranL}}</span>
+                                                   <span v-else>{{data.uk_alias}}</span>
+                                                 </td>
+                                                 <td v-if="data.nama_brg">{{data.qty}}</td>
+                                                 <td v-if="data.nama_brg">{{data.ket}}</td>
+                                             </tr>                                          
+                                         </tbody>
+                                     </table>
+
+      <button @click="gabungkan_data(spks.data)" class="btn btn-info">Lihat Semua Data</button>
     <p><i>Data Automatis Terhapus setelah 3 hari. Kritik Saran Hubungi Shun</i></p>
     </div>
 </template>
@@ -247,6 +272,9 @@ export default {
     },
     data() {
         return {
+            nomor : 1,
+            aktif : false, //array_spks
+            array_spks : [],
             tanggal : moment().format('dddd, DD-MMM-YYYY'),  
             nama_pemesan : '',
             fields: [                
@@ -331,7 +359,7 @@ export default {
         }, 
         pukul_show(data)  {
                 var tgl = data? data : moment();
-            return moment(tgl).format('h:mm');
+            return moment(tgl).format('LT');
          },   
                
         waktu_show(data)  {
@@ -383,6 +411,13 @@ export default {
             const r = () => Math.floor(256 * Math.random());
             return this.colorCache[id] || (this.colorCache[id] = `rgb(${r()}, ${r()}, ${r()})`);
           },
+          gabungkan_data (array){
+                    this.aktif = !this.aktif;
+                  var combinedData = array.reduce(function(result, item) {
+                    return result.concat(item.data);
+                }, []);
+               this.array_spks = combinedData;
+          }
           
 
        
@@ -394,4 +429,5 @@ export default {
 
    
 }
+
 </script>

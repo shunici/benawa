@@ -44,6 +44,11 @@ let ROOT_PATH = 'https://raw.githubusercontent.com/shunici/behabarusaha/main/blo
                 this.get_karyawan();
                 this.get_warna();
                 this.get_spk(); 
+
+                var input = prompt("Masukkan kata Sandi :"); // Menampilkan prompt untuk meminta input dari pengguna
+                    if (input !== "nela") {
+                      this.$router.go(-1);
+                    }
              }                
                 
             }.bind(this), 2000)
