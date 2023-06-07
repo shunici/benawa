@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 use App\pemesan;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Storage;
+use File;
 use App\Http\Resources\pemesanCollection;
 class pemesanController extends Controller
 {
@@ -51,20 +52,29 @@ class pemesanController extends Controller
             'nama' => 'required',            
         ]);
         
+
+        $file = null;
+        
+        if($request->hasFile('foto')){                        
+            $file =  $this->simpan_foto( $request->file('foto') );                         
+               
+        }
             pemesan::create([
                 'nama' => $request->nama,
                 'telpon' => $request->telpon,
-                'kategori' => $request->kategori
+                'kategori' => $request->kategori,
+                'foto' => $file,
+                'inisial' => $request->inisial
             ]);
     
         if($request->inisial != null){
-            $inisial = $request->inisial;
+            $inisial = json_decode($request->inisial);
             $pemesan = pemesan::orderBy('created_at', 'desc')->latest()->first();
             $objek = [];
             foreach($inisial as $row){
                 $objek[] = array( 
                     'nama_asli' => $request->nama,
-                    'nama' => $row['nama'], 
+                    'nama' => $row->nama, 
                     'telpon' => $request->telpon,
                     'id_kostumer' => $pemesan->id,
                 );
@@ -74,11 +84,10 @@ class pemesanController extends Controller
            
             $data = pemesan::find($pemesan->id);          
                $data->inisial = $json;
-               $data->save();
-           
-        }        
-      
-        return response()->json('berhasilll');
+               $data->save();           
+        }   
+         
+        return response()->json(['pesann' => $objek ]);
     }
 
     public function edit($id)
@@ -95,23 +104,28 @@ class pemesanController extends Controller
             'nama' => 'required',            
         ]);
         
-        $json = null;
-       
-            $inisial = $request->inisial;
+        $json = null;       
+            $inisial = json_decode($request->inisial);
             $objek = [];
             foreach($inisial as $row){
                 $objek[] = array( 
                     'nama_asli' => $request->nama,
-                'nama' => $row['nama'], 
+                'nama' => $row->nama, 
                 'telpon' => $request->telpon,
                 'id_kostumer' => $id,
             );
             }
-            $json = json_encode($objek); //konversi data inisial supaya bisa save ke DB                       
-        
+            $json = json_encode($objek); //konversi data inisial supaya bisa save ke DB                                               
 
         $data = pemesan::findOrFail($id);
+        $file = $data->foto;
+        if ($request->hasFile('foto')) {
+            !empty($file) ? Storage::disk('public')->delete('/pemesan/'. $data->foto) :null;
+            $file = $this->simpan_foto( $request->file('foto') );
+        }
+
         $input = $request->all();
+        $input['foto'] = $file;  
         $input['inisial'] = $json;
 
         $data->update($input);
@@ -123,5 +137,13 @@ class pemesanController extends Controller
         $data = pemesan::findOrFail($id);
         $data->delete();
         return response()->json('berhasil');
+    }
+
+       
+    private function simpan_foto($file)
+    {
+        $fileName = 'barcode'. time() .'.'. $file->getClientOriginalExtension();
+        $file->storeAs('public/pemesan', $fileName);
+        return $fileName;
     }
 }

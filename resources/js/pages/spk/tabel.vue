@@ -98,23 +98,21 @@
          
              
        </tbody>     
-     </table>
-       <table  class="table border-0 table-sm ">
-                 
+     </table>     
+
+                <table  class="table border-0 table-sm ">                 
                     <div v-for="(rows, andix) in spk.data" :key="andix + 'tblbawah'" >
                     <tr style="text-align: left; vertical-align: top;"
                     v-if="rows.ket != null && rows.ket.length > 10">                                                
                        <div :style="{fontSize : uk_font + 'rem'}">Ket. No {{andix+1}} →  <strong class="text-uppercase">{{rows.ket}}</strong> </div>
                     </tr>                  
-                    </div>                             
-              
-
+                    </div>                                           
                      <tr class="text-center">
                        <input @keyup.enter="aktif_pesan"  v-if="ket_lain.aktif" type="text" class="form-control" v-model="spk.text" >
                       <div id="demoFont"  @dblclick="aktif_pesan" v-else :style="{fontSize : uk_font + 'rem'}"><strong class="text-uppercase">{{spk.text}}</strong> </div>
-                    </tr>
-                
+                    </tr>                
                 </table> 
+                
 <p><i>Spk dibuat pada pukul :  <b> {{pukul}}</b> </i> </p>
       <table class="table table-bordered table-sm " style="margin-top: -13px;">
                     <tr style="text-align: center;" class="bg-info" >
@@ -141,15 +139,21 @@
           <!-- tutup col-md8 -->
           
           <div class="col-md-2">                              
-                    <div v-for="index in 4" :key=" 'gbr'+index">                      
+                    <div v-for="index in 3" :key=" 'gbr'+index">                      
                              <div class="uploader" @paste="onPaste">                               
                                  <!-- <a :href="tampil[index]" target="_blank" v-if="tampil[index]"> -->
                                     <img class="img-thumbnail" v-if="tampil[index]" :src="tampil[index]" />
                                   <!-- </a> -->
                                 <!-- <img src="" />                           -->
+                                
                                 <input :key="keyInput" type="file" id="filePhoto"  @change="mode ? handleImg($event, index-1) : tanganiImg($event, index-1)" />                                
-                            </div>   
-                    </div>         
+                            </div>
+                    </div>    
+                       
+                            <div class="uploader border border-white">
+                                 <img class="img-thumbnail " style="width : 100%" :src="spk.foto" alt="">     
+                            </div>
+                 
           </div> 
       
             <span v-for="(row, index) in spk.data" :key="'kets'+index" class="col" > 

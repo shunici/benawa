@@ -28,6 +28,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             axios.get(`/api/pemesan?page=${state.page}&q=${search}`)
             .then((response) => {
+                
                 commit('ASSIGN_DATA', response.data.data)              
                 resolve(response.data)
             })

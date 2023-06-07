@@ -114,7 +114,8 @@ import { mapActions, mapState, mapMutations } from 'vuex'
             return {              
                 is_aktif : false,    
                        filelist: [], // Store our uploaded files          
-                       nama_array : []
+                       nama_array : [],
+                       id_pemesan_foto : '',
             }
         },
         created(){
@@ -132,7 +133,15 @@ import { mapActions, mapState, mapMutations } from 'vuex'
                 }),
                 
         },
+        watch : {
+          id_pemesan_foto () {
+              this.edit_data_pemesan(this.id_pemesan_foto).then( (res) => {                       
+              this.spk.foto = '/storage/pemesan/' +  res.data.foto
+          } )
+          }
+        },
         methods : {
+          ...mapActions('pemesan_stores', ['edit_data_pemesan']),
           ...mapActions('spk_stores', ['besar_uk_font', 'kecil_uk_font', 'pesan_aktif']),
           ...mapActions('data_spk_stores', ['get_data_spk']),
             ...mapMutations('spk_stores', ['RANDOM_WARNA']),
@@ -230,7 +239,8 @@ import { mapActions, mapState, mapMutations } from 'vuex'
             var nama = e.target.id;        
             this.spk.nama_pemesan = nama;
             // this.spk.no_wa = telpon; 
-             this.spk.id_kostumer = id;                          
+             this.spk.id_kostumer = id;    
+             this.id_pemesan_foto = id;                      
         },  
         clear_phone(){
           this.spk.no_wa = "";

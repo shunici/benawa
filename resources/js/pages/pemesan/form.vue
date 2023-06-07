@@ -27,7 +27,17 @@
                         </div>                    
               </div>            
         </div>
-        <!-- tutup row -->     
+        <!-- tutup row -->  
+                         
+                    <div class="form-group">
+                    <label class="form-check-label">
+                        <input   @change="uploadImage($event)"    class="form-check-input" type="file" name="kategori" id="" value="foto"> Barcode 
+                    </label>
+                    </div>  
+                    <div class="form-group">
+                        <img width="200" v-if="tampil_foto" :src="tampil_foto" />
+                    </div>
+   
         <br>
            <div class="form-group">                        
                 <label for="">Inisial</label>
@@ -65,6 +75,7 @@ import {mapState, mapActions, mapMutations} from 'vuex'
                   telpon : res.data.telpon,         
                   kategori : res.data.kategori                
               }
+              this.tampil_foto = '/storage/pemesan/' +  res.data.foto
           } )
         }
     },
@@ -75,10 +86,12 @@ import {mapState, mapActions, mapMutations} from 'vuex'
          nama : '',
           inisial : [],
           telpon : '',          
-          kategori : ''          
+          kategori : '',
+          foto : ''          
         },       
         show: true,      
-        pesan : false
+        pesan : false,
+           tampil_foto : '',
       }
     },  
     computed : {
@@ -89,19 +102,30 @@ import {mapState, mapActions, mapMutations} from 'vuex'
        ...mapMutations('pemesan_stores', ['SET_ID_UPDATE']),
       ...mapActions('pemesan_stores', ['submit_data_pemesan', 'update_data_pemesan', 'edit_data_pemesan']),
 
-      proses(){          
+        uploadImage(event){     
+                        this.form.foto = event.target.files[0];                     
+                        this.tampil_foto = URL.createObjectURL(this.form.foto);
+            },
+
+      proses(){        
+         var konver_inisial = JSON.stringify(this.form.inisial);
+         let form = new FormData();
+          form.append('nama', this.form.nama);
+          form.append('inisial', konver_inisial);
+          form.append('kategori', this.form.kategori);
+          form.append('foto', this.form.foto);
           //pada array diatas akan dibuat id nya di controllernya, id berfungsi untuk menyamakan dengan pemesan
         if(this.$route.name == "pemesan.add"){     
-              this.submit_data_pemesan(this.form).then(() => {
+              this.submit_data_pemesan(form).then(() => {
                 this.pesan = true   
-                  setTimeout( () => this.$router.push({name : 'pemesan.data'}), 1000);     
+                setTimeout( () => this.$router.push({name : 'pemesan.data'}), 1000);  
             }) 
 
         }else if(this.$route.name ==  "pemesan.edit") {   
             this.SET_ID_UPDATE(this.$route.params.id);
-            this.update_data_pemesan(this.form).then(() => {             
-                this.pesan = true   
-                  setTimeout( () => this.$router.push({name : 'pemesan.data'}), 1000);     
+            this.update_data_pemesan(form).then(() => {             
+                  this.pesan = true   
+                setTimeout( () => this.$router.push({name : 'pemesan.data'}), 1000);  
             }) 
         }
       },

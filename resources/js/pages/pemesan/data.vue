@@ -89,6 +89,7 @@ export default {
                 {key: 'inisial', sortable: true},
                 {key: 'kategori', sortable: true},
                 {key: 'telpon', sortable: true},                
+                {key: 'foto', sortable: true}, 
                 {key: 'aksi', sortable: false}, //TAMBAHKAN CODE INI
             ],
             searching: ''
