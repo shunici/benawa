@@ -54,9 +54,9 @@ class pemesanController extends Controller
         
 
         $file = null;
-        
+        $nama_tanpa_spasi = str_replace(' ', '', $request->nama);
         if($request->hasFile('foto')){                        
-            $file =  $this->simpan_foto( $request->file('foto') );                         
+            $file =  $this->simpan_foto( $request->file('foto'), $nama_tanpa_spasi );                         
                
         }
             pemesan::create([
@@ -115,13 +115,14 @@ class pemesanController extends Controller
                 'id_kostumer' => $id,
             );
             }
-            $json = json_encode($objek); //konversi data inisial supaya bisa save ke DB                                               
+            $json = json_encode($objek); //konversi data inisial supaya bisa save ke DB   
 
+            $nama_tanpa_spasi = str_replace(' ', '', $request->nama);
         $data = pemesan::findOrFail($id);
         $file = $data->foto;
         if ($request->hasFile('foto')) {
             !empty($file) ? Storage::disk('public')->delete('/pemesan/'. $data->foto) :null;
-            $file = $this->simpan_foto( $request->file('foto') );
+            $file = $this->simpan_foto( $request->file('foto'), $nama_tanpa_spasi );
         }
 
         $input = $request->all();
@@ -135,14 +136,16 @@ class pemesanController extends Controller
     public function delete($id)
     {
         $data = pemesan::findOrFail($id);
-        $data->delete();
+        Storage::disk('public')->delete('/pemesan/'. $data->foto);
+        $data->delete();     
+        
         return response()->json('berhasil');
     }
 
        
-    private function simpan_foto($file)
+    private function simpan_foto($file, $nama)
     {
-        $fileName = 'barcode'. time() .'.'. $file->getClientOriginalExtension();
+        $fileName = $nama . 'Barcode'. time() .'.'. $file->getClientOriginalExtension();
         $file->storeAs('public/pemesan', $fileName);
         return $fileName;
     }

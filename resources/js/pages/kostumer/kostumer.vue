@@ -222,24 +222,24 @@
         <!-- //tutup row -->
         
                                      <table class="table" style="font-size: 8px;" v-if="aktif">
-                                         <thead>
+                                         <thead class="thead-dark">
                                              <tr>                                                 
                                                  <th>Nama Barang</th>
                                                  <th>Bahan</th>
                                                  <th>Ukuran</th>
                                                  <th>QTY</th>
-                                                 <td>Ket</td>
+                                                 <th>Ket</th>
                                              </tr>
                                          </thead>
                                          <tbody>
                                              <tr v-for="(data, index) in array_spks" :key="index">                                                  
                                                  <td v-if="data.nama_brg" scope="row">{{data.nama_brg}}</td>
                                                  <td v-if="data.nama_brg">{{data.bahan}}</td>
-                                                 <td v-if="data.nama_brg">
+                                                 <td v-if="data.nama_brg" class="align-middle text-center" style="padding : 0; margin : 0;">
                                                    <span v-if="data.ukuranP">   {{data.ukuranP}} <span v-if="data.ukuranL">x</span> {{data.ukuranL}}</span>
                                                    <span v-else>{{data.uk_alias}}</span>
                                                  </td>
-                                                 <td v-if="data.nama_brg">{{data.qty}}</td>
+                                                 <td class="text-center" v-if="data.nama_brg">{{data.qty}}</td>
                                                  <td v-if="data.nama_brg">{{data.ket}}</td>
                                              </tr>                                          
                                          </tbody>
@@ -249,6 +249,9 @@
     <p><i>Data Automatis Terhapus setelah 3 hari. Kritik Saran Hubungi Shun</i></p>
     </div>
 </template>
+<style>
+
+</style>    
 <script>
 import Swal from 'sweetalert2'
 

@@ -120,8 +120,20 @@ export default {
     },
     methods : {
         ...mapActions('pemesan_stores', ['get_data_pemesan', 'edit_data_pemesan', 'remove_data_pemesan']),
-        hapus(param){
-            this.remove_data_pemesan(param);
+        hapus(param){                                                            
+            Swal.fire({
+            title: 'Data Akan Dihapus',
+            text: "Data permanen hilang",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oke, Hapus!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+              this.remove_data_pemesan(param);
+            }
+            })
         },
         edit(param){
              this.$router.push({
