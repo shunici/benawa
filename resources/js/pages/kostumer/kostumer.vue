@@ -3,7 +3,7 @@
     <div class="mt-3">    
         <h1>{{nama_pemesan}}</h1>         
                 <div class="row">  
-                    <!-- <div class="col-md ">                   
+                    <!-- <div class="col-md" v-if="input">                   
                         <input type="text" v-model="searching" class="form-control" placeholder="Pencarian kostumer......">
                     </div>   -->
                        <b-button v-b-toggle.collapse-2 class="m-1">Filter</b-button>
@@ -110,8 +110,10 @@
                            <b-table striped hover responsive  bordered :items="spks.data" :fields="visibleFields" show-empty>
                                  
                                  <template #cell(cetakan_masuk)="row">
-                                    <div :key="row.index">
-                                        {{row.index + 1}}
+                                    <div :key="row.index" class="text-center">
+                                        {{row.index + 1}} 
+                                        <span style="font-size : 60%; font-weight : 200" class="badge badge-warning" v-if="row.item.status == 'cs'">Selesai</span>
+                                        <span style="font-size : 60%; font-weight : 200" class="badge badge-primary" v-if="row.item.status == 'cp'">Pending</span>
                                     </div>
                                 </template>
                                  <template #cell(tgl)="row">
@@ -168,7 +170,7 @@
                                          </thead>
                                          <tbody>
                                              <tr v-for="(data, index) in row.item.data" :key="index"> 
-                                                 <td v-if="data.nama_brg" >{{index+1}}</td>
+                                                 <td v-if="data.nama_brg" >{{index+1}}  </td>
                                                  <td v-if="data.nama_brg" scope="row">{{data.nama_brg}}</td>
                                                  <td v-if="data.nama_brg">{{data.bahan}}</td>
                                                  <td v-if="data.nama_brg">
@@ -259,15 +261,32 @@ import moment from "moment"
 moment.locale('id'); 
 import { mapActions, mapState } from 'vuex'
 export default {
-    created() {        
-        this.$store.state.spk_stores.query.id_kostumer = this.$route.params.id_kostumer;
+    created() {     
+      
         this.$store.state.spk_stores.query.status = 'cm';
-         this.edit_data_pemesan(this.$route.params.id_kostumer).then( (res) => {
+
+        let id_pemesan = this.$route.params.id_kostumer;
+        if(typeof id_pemesan != 'undefined') {
+                //picu id_kostumer agar get spk sesuai id kostumer   
+              this.$store.state.spk_stores.query.id_kostumer = this.$route.params.id_kostumer;
+
+             this.edit_data_pemesan(this.$route.params.id_kostumer).then( (res) => {
              this.nama_pemesan = res.data.nama;
-          } )
+            } )
+
+        }else { 
+            this.input = true
+            }
+        
+        
+
+        
+
+
             
     },
     mounted(){
+        
            setTimeout(function () {
                this.get_spk();  
                
@@ -275,17 +294,18 @@ export default {
     },
     data() {
         return {
-            nomor : 1,
+
+            input : false, // jika id kostumer tidak ada, nyalakan inputan ,tapi sementara ini blm diaktfikan, artinya mungkin utk masa dpn
             aktif : false, //array_spks
             array_spks : [],
             tanggal : moment().format('dddd, DD-MMM-YYYY'),  
             nama_pemesan : '',
             fields: [                
-                {key: 'cetakan_masuk', label : 'CM', sortable: true , visible: true},   
-                {key: 'tgl', label : 'Pkl', sortable: true, visible: true}, 
-                {key: 'kategori', label : 'Kategori', sortable: true, visible: true},                        
-                {key : 'show_details', label :'Detail', sortable:true, visible: true},
-                {key: 'aksi', label : 'aksi', sortable: false, visible: true}, 
+                {key: 'cetakan_masuk', label : 'CM', sortable: true , visible: true, class : 'text-center align-middle'},   
+                {key: 'tgl', label : 'Pkl', sortable: true, visible: true, class : 'text-center align-middle'}, 
+                {key: 'kategori', label : 'Kategori', sortable: true, visible: true, class : 'text-center align-middle'},                        
+                {key : 'show_details', label :'Detail', sortable:true, visible: true, class : 'text-center align-middle'},
+                {key: 'aksi', label : 'aksi', sortable: false, visible: true, class : 'text-center align-middle'}, 
             ],
             searching: '',
             colorCache  : {}, //tuk keperluan warna random

@@ -180,6 +180,7 @@ import { mapActions, mapState, mapMutations } from 'vuex'
             //khusus gambar drop
               onChange() {
               this.spk.id_kostumer = '';
+              this.spk.foto = '';
                 this.spk.user = [];
                this.filelist = [...this.$refs.file.files];   
 

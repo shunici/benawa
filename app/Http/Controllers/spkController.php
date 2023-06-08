@@ -26,10 +26,10 @@ class spkController extends Controller
         if($status == "csd") {
             $spk = $spk->where('status', $status);
         }
-
-        $status_cm = request()->status;        
-        if($status_cm == "cm") {
-            $spk = $spk->where('status', $status);
+        //cs dan cm tetap di araykan
+        $status_cm_cs_cp = request()->status;        
+        if($status_cm_cs_cp == "cm" ||  $status_cm_cs_cp == "cs" || $status_cm_cs_cp == 'cp' ) {
+            $spk = $spk->whereIn('status', ['cm', 'cs', 'cp']);
         }
 
         $id_kostumer = request()->id_kostumer;        

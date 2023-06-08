@@ -17,7 +17,7 @@ class pemesanController extends Controller
         ->when(request()->q, function($pemesans) {             
             $pemesans = $pemesans->where('nama', 'LIKE', '%' . request()->q . '%')
                 ->orWhere('kategori', 'LIKE', '%' . request()->q . '%');                       
-        })->paginate(50); 
+        })->paginate(300); 
         return response()->json(['status' => 'success', 'data' => $pemesans]);
         
     }
