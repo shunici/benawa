@@ -117,8 +117,9 @@
                                     </div>
                                 </template>
                                  <template #cell(tgl)="row">
-                                    <div :key="row.index">
-                                        {{pukul_show(row.item.created_at)}}
+                                    <div :key="row.index" style="line-height : 0.8">
+                                        {{pukul_show(row.item.created_at)}} <br>
+                                           <span style="font-size : 50%; font-weight : 200" class="">{{dibuat(row.item.created_at)}}</span>
                                     </div>
                                 </template>
 
@@ -200,7 +201,7 @@
                                 </template>                              
 
                                 </b-table>
-
+  <button @click="gabungkan_data(spks.data)" class="btn btn-info">Lihat Semua Data</button>
                             <div class="row">
                                 <div class="col-md-6">
                                     <p v-if="spks.data"><i class="fa fa-bars"></i> {{ spks.data.length }} item dari {{ spks.meta.total }} total data</p>
@@ -223,31 +224,31 @@
         </div>
         <!-- //tutup row -->
         
-                                     <table class="table" style="font-size: 8px;" v-if="aktif">
+                                     <table class="table table-bordered table-sm table-responsive" style="font-size: 8px;" v-if="aktif">
                                          <thead class="thead-dark">
-                                             <tr>                                                 
-                                                 <th>Nama Barang</th>
-                                                 <th>Bahan</th>
-                                                 <th>Ukuran</th>
-                                                 <th>QTY</th>
-                                                 <th>Ket</th>
+                                             <tr class="text-center">                                                 
+                                                <th style="width : 40%">NAMA BARANG</th>
+                                                <th style="width: 20%">UKURAN</th>
+                                                <th style="width:20%">BAHAN</th>
+                                                <th style="width: 5%">QTY</th>
+                                                <th style="width: 15%">KET</th> 
                                              </tr>
                                          </thead>
                                          <tbody>
                                              <tr v-for="(data, index) in array_spks" :key="index">                                                  
-                                                 <td v-if="data.nama_brg" scope="row">{{data.nama_brg}}</td>
-                                                 <td v-if="data.nama_brg">{{data.bahan}}</td>
+                                                 <td class="align-middle" v-if="data.nama_brg" scope="row">{{data.nama_brg}}</td>                                                 
                                                  <td v-if="data.nama_brg" class="align-middle text-center" style="padding : 0; margin : 0;">
                                                    <span v-if="data.ukuranP">   {{data.ukuranP}} <span v-if="data.ukuranL">x</span> {{data.ukuranL}}</span>
                                                    <span v-else>{{data.uk_alias}}</span>
                                                  </td>
-                                                 <td class="text-center" v-if="data.nama_brg">{{data.qty}}</td>
-                                                 <td v-if="data.nama_brg">{{data.ket}}</td>
+                                                 <td class="align-middle text-center " v-if="data.nama_brg">{{data.bahan}}</td>
+                                                 <td class="align-middle text-center" v-if="data.nama_brg">{{data.qty}}</td>
+                                                 <td class="align-middle"  v-if="data.nama_brg">{{data.ket}}</td>
                                              </tr>                                          
                                          </tbody>
                                      </table>
 
-      <button @click="gabungkan_data(spks.data)" class="btn btn-info">Lihat Semua Data</button>
+    
     <p><i>Data Automatis Terhapus setelah 3 hari. Kritik Saran Hubungi Shun</i></p>
     </div>
 </template>
@@ -389,6 +390,15 @@ export default {
                 var tgl = data? data : moment();
             return moment(tgl).format('LLLL');
          }, 
+          dibuat (data){  //hanya membaca menit 
+              const created = moment(data);
+              const sekarang = moment();
+
+              const diff = sekarang.diff(created);
+              const diffDuration = moment.duration(diff);
+              let hari  = diffDuration.days() > 0 ? diffDuration.days() + ' Hari lalu ' : '' ;                                          
+              return  hari;               
+              }, 
         csd_set(param){                                        
             Swal.fire({
             title: 'Pindahkan Cetakan',

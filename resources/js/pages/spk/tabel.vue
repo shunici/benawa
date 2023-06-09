@@ -390,7 +390,7 @@ moment.locale('id');
           
         },
         clear_all(){
-
+          this.spk.foto = ''; //foto skenan
           for (let i = 0; i < 4; i++) {           
           this.spk.data[i].nama_brg = "";
           this.spk.data[i].bahan = "";
