@@ -427,8 +427,8 @@ moment.locale('id');
               reader.onload = (evt) => {
                 console.log(evt.target.result); // data url!
                   var posisi = prompt("Please enter your name:", 1);
-                 this.tampil[posisi] = evt.target.result;
-                  this.spk.foto = evt.target.result;
+                 this.tampil[posisi] = evt.target.result;                  
+                  this.spk.foto_spk = evt.target.result;
               };
               reader.readAsDataURL(blob);
             }

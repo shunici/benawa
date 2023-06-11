@@ -249,9 +249,9 @@
                         <span class="badge  mr-1 mt-1" v-for="(san, sun) in item.user" :key=" 'in' + sun"
                         v-b-tooltip.hover.html="ket(san.ket, san.waktu )" :style="{backgroundColor: randomColor(sun+1)}">
                             {{san.nama}}
-                        </span>
-<br>
-                   <img v-if="item.foto" :src="item.foto" alt="Girl in a jacket" width="230"> 
+                        </span><br>
+                   
+                   <img v-if="item.foto" :src="'/storage/spk/'+ item.foto_spk" :alt="item.foto_spk" style="width : 100%">
                     
                 </b-card>
             </b-collapse>
@@ -387,7 +387,7 @@
                             {{san.nama}}
                         </span>
 <br>
-                   <img v-if="item.foto" :src="item.foto" alt="Girl in a jacket" width="230"> 
+                    <img v-if="item.foto" :src="'/storage/spk/'+ item.foto_spk" :alt="item.foto_spk" style="width : 100%">
                     
                 </b-card>
             </b-collapse>
@@ -528,7 +528,7 @@
                             {{san.nama}}
                         </span>
 <br>
-                   <img v-if="item.foto" :src="item.foto" alt="Girl in a jacket" width="230"> 
+                    <img v-if="item.foto" :src="'/storage/spk/'+ item.foto_spk" :alt="item.foto_spk" style="width : 100%">
                     
                 </b-card>
             </b-collapse>

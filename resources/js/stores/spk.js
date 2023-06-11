@@ -31,7 +31,8 @@ const state = () => ({
         text : '',
         text_voice : false, //bolean  
         no_nota : '',  
-        foto : '',
+        foto : '',//skenan_kostumer
+        foto_spk : '', //buat gambar
                  
       },          
       cekBox : {
@@ -160,6 +161,7 @@ CLEAR_FORM (state) {
   user : '',
   no_wa : '',
   foto : '',
+  foto_spk : '',
   kategori : 'Outdoor',
   posisi : '',        
   text : '',

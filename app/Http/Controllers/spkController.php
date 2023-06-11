@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\spk;
 use App\Http\Resources\spkCollection;
-
+use Illuminate\Support\Str;
+use File;
+use Illuminate\Support\Facades\Storage;
 class spkController extends Controller
 {
       
@@ -111,8 +113,14 @@ class spkController extends Controller
         $this->validate($request, [
           'nama_pemesan' => 'required'          
         ]); 
-        $input['no_nota'] = 0;        
-        $input = $request->all();                    
+        $input['no_nota'] = 0;   
+        $input = $request->all();   
+        $base64_image = $input['foto_spk'];
+        unset($input['foto_spk']);
+        $filename = 'spk_'.Str::random(10) . '.jpg'; // nama unik
+        $this->saveBase64Image($base64_image, $filename);
+        $input['foto_spk'] = $filename;                     
+
         spk::create($input);     
         return response()->json(['status' => $request->all()], 200);
     }
@@ -218,7 +226,8 @@ class spkController extends Controller
 
     public function destroy($id)
     {
-        $data = spk::findOrFail($id);        
+        $data = spk::findOrFail($id);   
+        Storage::disk('public')->delete('/spk/'. $data->foto_spk);                                   
         $data->delete();  
         return response()->json(['status' => 'success'], 200);
     }
@@ -234,5 +243,16 @@ class spkController extends Controller
           'data' => $data      
            ], 200);
     }
-   
+    private function saveBase64Image($base64_image, $filename)
+    {
+        // Decode Base64 string
+        $base64_image = str_replace('data:image/png;base64,', '', $base64_image);
+        $image_data = base64_decode($base64_image);
+        
+        // Path untuk menyimpan file gambar
+        $file_path = storage_path('app/public/spk/' . $filename);
+        // Storage::put($file_path, $image_data);
+        // Menyimpan data gambar ke file JPG
+        file_put_contents($file_path, $image_data);
+    }
 }

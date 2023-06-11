@@ -190,13 +190,14 @@
                             {{san.nama}}
                         </span>
                         <br>
+                        <img :src="'/storage/spk/'+ row.item.foto_spk" alt="" style="width : 100%">
                                     <b-button class="float-right" size="sm" @click="row.toggleDetails">Senyapkan</b-button>
                           
                                 </template>
                                 <template #cell(aksi)="row">
                                     <div :key="row.index">
-                                        <button v-if="query.status == 'cm' " class="btn btn-success btn-sm" @click="csd_set(row.item.id)">   <b-icon icon="pencil-square"></b-icon></button>                                                                                
-                                        <button v-if="query.status == 'csd' " class="btn btn-success btn-sm" @click="cm_set(row.item.id)"> <b-icon icon="pencil-square"></b-icon></button>           
+                                        <button v-if="query.status == 'cm' " class="btn btn-success btn-sm" @mousedown="startTimer(row.item.id)" @mouseup="cancelTimer" @mouseleave="cancelTimer" @click="csd_set(row.item.id)">   <b-icon icon="pencil-square"></b-icon></button>                                                                                
+                                        <button v-if="query.status == 'csd' " class="btn btn-success btn-sm" @mousedown="startTimer(row.item.id)" @mouseup="cancelTimer" @mouseleave="cancelTimer" @click="cm_set(row.item.id)"> <b-icon icon="pencil-square"></b-icon></button>           
                                     </div>
                                 </template>                              
 
@@ -250,6 +251,7 @@
 
     
     <p><i>Data Automatis Terhapus setelah 3 hari. Kritik Saran Hubungi Shun</i></p>
+   
     </div>
 </template>
 <style>
@@ -295,6 +297,7 @@ export default {
     },
     data() {
         return {
+            holdTimer: null,
 
             input : false, // jika id kostumer tidak ada, nyalakan inputan ,tapi sementara ini blm diaktfikan, artinya mungkin utk masa dpn
             aktif : false, //array_spks
@@ -365,7 +368,7 @@ export default {
     },
     methods : {
         ...mapActions('pemesan_stores', ['edit_data_pemesan']),
-        ...mapActions('spk_stores', ['get_spk', 'spk_csd','spk_cm' , 'edit_spk', 'remove_spk']),              
+        ...mapActions('spk_stores', ['get_spk', 'spk_csd','spk_cm', 'spk_cs' , 'edit_spk', 'remove_spk']),              
         mulai_tgl(param){
           this.$store.state.spk_stores.mulai_tgl = param
           this.get_spk()
@@ -450,8 +453,32 @@ export default {
                     return result.concat(item.data);
                 }, []);
                this.array_spks = combinedData;
-          }
-          
+          },
+          //handling tombol dirandam
+       startTimer(param) {
+          this.holdTimer = setTimeout(() => {
+            this.showAlert(param);
+        }, 1000); // Waktu dalam milidetik (1000ms = 1 detik)
+        },
+        cancelTimer() {
+        clearTimeout(this.holdTimer);
+        },
+        showAlert(param) {
+               Swal.fire({
+            title: 'Cetakan Selesai?',
+            text: "Ubah Status cetakan menjadi selesai",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oke, Ubah!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                this.spk_cs(param);   
+            }
+            })  
+        },
+
 
        
     },

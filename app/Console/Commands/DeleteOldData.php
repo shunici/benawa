@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\spk;
+use Illuminate\Support\Facades\Storage;
 class DeleteOldData extends Command
 {
     /**
@@ -39,8 +40,17 @@ class DeleteOldData extends Command
      */
     public function handle()
     {
-        spk::where('created_at', '<', Carbon::now()->subDay(4))->delete();
+       $data =  spk::where('created_at', '<', Carbon::now()->subDay(4))->get();
+       $total = $data->count();  //jika nol berrti tidak ada
+       if($total > 5) {        
+        foreach($data as $row) { //hapus satu satu secara loop
+            $spk = spk::findOrFail($row->id);    
+            Storage::disk('public')->delete('/spk/'. $spk->foto_spk);                              
+            $spk->delete();
+        } //foreach
+     } //if
         $name = $this->info('data 4 hari dihapus');
     }
 }
+
 
