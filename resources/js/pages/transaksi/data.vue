@@ -134,7 +134,8 @@
     <b-card header-tag="header" footer-tag="footer"  v-if="cekBox.cm">
      <template #header>
         <h6 class="float-left mt-2 "> <b>CETAKAN MASUK</b> <span class="badge badge-warning"> {{cm.length }}</span> </h6> 
-          <b-button  aria-controls="collapse-1"  @click="visible = !visible"  variant="primary" class="float-right">{{visible ? "Sembunyi" : "Detail"}}</b-button>       
+          
+          <b-button  aria-controls="collapse-1"   variant="primary" class="float-right" @click="cs_array">Pindah Ke CS</b-button>            
       </template>
       <b-collapse id="collapse-1"  v-model="visible" >
        <draggable v-model="item_cm"  group="items" v-bind="dragOptions">
@@ -670,7 +671,7 @@ export default {
     },
     methods : {
       ...mapActions('alert_stores', ['edit_alert', 'get_alert']),
-        ...mapActions('spk_stores', [ 'jadikan_csd', 'get_spk', 'spk_csd', 'edit_spk', 'update_spk', 'remove_spk', 'gabung_spk', 'searching_spk', 'searching_nota', 'filter_spk', 'handle_spk']),        
+        ...mapActions('spk_stores', [ 'jadikan_csd', 'jadikan_cs', 'get_spk', 'spk_csd', 'edit_spk', 'update_spk', 'remove_spk', 'gabung_spk', 'searching_spk', 'searching_nota', 'filter_spk', 'handle_spk']),        
         hubungi (kost, wa, data, param) {
            
             let barang = '';
@@ -704,7 +705,10 @@ export default {
 
 
              
-        },   
+        },     
+        cs_array(){
+          this.jadikan_cs();
+        }, 
         csd_array(){
           this.jadikan_csd();
         },                

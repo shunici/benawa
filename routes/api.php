@@ -81,6 +81,7 @@ Route::post('/spk/cm/{id}', 'spkController@cm');
 Route::post('/spk-handlespk/{id}', 'spkController@handlespk');
 Route::get('/query_data', 'spkController@queriData');
 Route::post('/jadikan-csd', 'spkController@jadikancsd');
+Route::post('/jadikan-cs', 'spkController@jadikancs');
 
 Route::resource('/agenda', 'agendaController')->except(['show', 'update']);
 Route::post('/agenda/update/{id}', 'agendaController@update');

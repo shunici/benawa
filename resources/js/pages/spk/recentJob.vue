@@ -54,6 +54,16 @@
 <div class="card">
   <div class="card-header">
 
+        <div class="form-check  mt-1"  @click="mode_spk(true)">
+            <label for="1aa" class="form-check-label">
+                <input class="form-check-input" checked type="radio" name="mode_spk" id="1aa" value="0">Automatis
+            </label>
+        </div>
+        <div class="form-check  mt-1" @click="mode_spk(false)">
+            <label for="2aa" class="form-check-label">
+                <input class="form-check-input" type="radio" name="mode_spk" id="2aa" value="4">Manual
+            </label>
+        </div>
       
     <div class="p-12 bg-gray-100 border border-gray-300" @dragover="dragover" @dragleave="dragleave" @drop="drop">
     <input style="display:none" type="file" multiple name="fields[assetsFieldHandle][]" id="assetsFieldHandle" 
@@ -245,7 +255,10 @@ import { mapActions, mapState, mapMutations } from 'vuex'
         },  
         clear_phone(){
           this.spk.no_wa = "";
-        }
+        } , //mode spk     
+           mode_spk(param){                  
+                 this.$store.state.spk_stores.mode = param
+           },
 
 
 

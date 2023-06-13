@@ -3,26 +3,15 @@
 <p>Jarak Space Label <b>{{uk_label}}</b> cm  |  mode spk <i><b>{{ mode ? 'Automatic' : 'Manual' }}</b></i> </p> 
 <div class="btn-group">
     
-        <div class="form-check form-check-inline mt-1"  @click="mode_spk(true)">
-            <label for="1aa" class="form-check-label">
-                <input class="form-check-input" checked type="radio" name="mode_spk" id="1aa" value="0">Automatis
-            </label>
-        </div>
-        <div class="form-check form-check-inline mt-1" @click="mode_spk(false)">
-            <label for="2aa" class="form-check-label">
-                <input class="form-check-input" type="radio" name="mode_spk" id="2aa" value="4">Manual
-            </label>
-        </div>
 
         <div class="dropdown">
         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-            Resolusi
+            Waktu Ambil
         </button>
         <div class="dropdown-menu">
-            <a class="dropdown-item" href="#" @click="atur_resolusi('40')">40</a>
-            <a class="dropdown-item" href="#" @click="atur_resolusi('60')">60</a>
-            <a class="dropdown-item" href="#" @click="atur_resolusi('80')">80</a>
-            <a class="dropdown-item" href="#" @click="atur_resolusi('96')">96</a>
+            <a class="dropdown-item" href="#" @click="pesan('siang diambil')">Siang Diambil</a>
+            <a class="dropdown-item" href="#" @click="pesan('sore diambil')">Sore Diambil</a>
+            <a class="dropdown-item" href="#" @click="pesan('malam diambil')">Malam Diambil</a>            
 
         </div>
         </div>
@@ -155,10 +144,7 @@ export default {
            label_jarak(param){        
           
                  this.$store.state.spk_stores.uk_label = param
-           },    //mode spk     
-           mode_spk(param){                  
-                 this.$store.state.spk_stores.mode = param
-           },
+           }, 
 
     }
 }

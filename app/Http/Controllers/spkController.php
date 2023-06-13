@@ -141,6 +141,24 @@ class spkController extends Controller
            
         return response()->json(['data-terkirim' => 'berhasil' ], 200);
     }
+    
+    public function jadikancs()
+    {
+
+            $spk = spk::where('status', 'cm')->get();
+
+             $data = $spk;             
+                
+             foreach($data as $row){ 
+                $update = spk::find($row['id']); 
+                $update->posisi = $row['posisi']; 
+                $update->status = 'cs'; 
+                $update->save(); 
+          }
+           
+        return response()->json(['data-terkirim' => 'berhasil' ], 200);
+    }
+
 
     public function gabung(Request $request)
     {

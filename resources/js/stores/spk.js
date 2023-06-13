@@ -272,6 +272,15 @@ const actions = {
             resolve(response.data)
         })
     })
+  },   
+  spk_cs({dispatch }, payload) {
+    return new Promise((resolve, reject) => {
+        axios.post(`/api/spk/cs/${payload}`)
+        .then((response) => {                       
+             dispatch('get_spk');
+            resolve(response.data)
+        })
+    })
   },  
 
   
@@ -541,6 +550,16 @@ if (payload != '') {
   jadikan_csd({dispatch}) {      
     return new Promise((resolve, reject) => {
       axios.post(`/api/jadikan-csd`)
+      .then((response) => {       
+            dispatch('get_spk');
+            resolve(response.data);
+                  
+      })
+     })
+  }, 
+  jadikan_cs({dispatch}) {      
+    return new Promise((resolve, reject) => {
+      axios.post(`/api/jadikan-cs`)
       .then((response) => {       
             dispatch('get_spk');
             resolve(response.data);

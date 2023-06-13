@@ -40,7 +40,7 @@ class DeleteOldData extends Command
      */
     public function handle()
     {
-       $data =  spk::where('created_at', '<', Carbon::now()->subDay(4))->get();
+       $data =  spk::where('created_at', '<', Carbon::now()->subDay(2))->get();
        $total = $data->count();  //jika nol berrti tidak ada
        if($total > 5) {        
         foreach($data as $row) { //hapus satu satu secara loop
