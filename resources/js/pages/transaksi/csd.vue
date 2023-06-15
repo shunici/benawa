@@ -118,7 +118,7 @@
                                 </template>
                                     <template #cell(costDesain)="row">
                                     <div :key="row.index + 'cost'">
-                                            {{row.item.costDesain}}  || {{row.item.costName}} 
+                                            {{row.item.costDesain}}  | {{row.item.costName}} 
                                     </div>
                                 </template>
 
@@ -212,7 +212,7 @@
                                  <tr class="bg-secondary" >                                        
                                         <th colspan="2">Grand Total</th>
                                        
-                                        <th colspan="2" class="text-right" > Rp {{rupiah(total)}}</th>
+                                        <th colspan="2" class="text-right" > Rp {{rupiah(total)}},-</th>
                                         
                                         <th colspan="3">{{total | terbilang}} Rupiah</th>                                      
                                     </tr>
