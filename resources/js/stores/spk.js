@@ -24,6 +24,8 @@ const state = () => ({
         },
         user : [], // [{nama : '', ket : '', waktu : ''}]
         desainer : '',
+        costDesain : 0,
+        costName : '', //inisial kost
         id_kostumer : '',
         no_wa : '',
         kategori : 'Outdoor',
@@ -84,6 +86,7 @@ const state = () => ({
       warna : [],
       no_nota : '',
       hasil_data : [], //queri khusus data, tobe continued
+      total : 0
       
     
 })
@@ -104,6 +107,9 @@ const mutations = {
     },
     SHOW_SELECT(state, payload ){
       state.show_select = payload
+    },    
+    ASSIGN_TOTAL(state, payload) {
+        state.total = payload
     },
     SHOW_URUTAN(state, payload ){
       state.urutan = payload
@@ -123,6 +129,8 @@ const mutations = {
       },
       user : payload.user,
       desainer : payload.desainer, 
+      costDesain : payload.costDesain,
+      costName : payload.costName,
       id_kostumer : payload.id_kostumer,
       no_wa : payload.no_wa,
       kategori : payload.kategori,
@@ -130,7 +138,8 @@ const mutations = {
       text : payload.text,
       text_voice : payload.text_voice, //bolean 
       no_nota : payload.no_nota, 
-      foto : payload.foto, 
+      foto : payload.foto,
+      foto_spk :payload.foto_spk, 
         data : [
             { id: 0, nama_brg : payload.data[0].nama_brg, produk_id: null, bahan: payload.data[0].bahan, bahan_id : null,  ukuranP : payload.data[0].ukuranP, ukuranL: payload.data[0].ukuranL, uk_alias: payload.data[0].uk_alias, qty : payload.data[0].qty, fns:payload.data[0].fns, ls: payload.data[0].ls,  ket: payload.data[0].ket },
             { id: 1, nama_brg : payload.data[1].nama_brg, produk_id: null, bahan: payload.data[1].bahan, bahan_id : null, ukuranP : payload.data[1].ukuranP, ukuranL: payload.data[1].ukuranL, uk_alias: payload.data[1].uk_alias, qty : payload.data[1].qty, fns:payload.data[1].fns, ls: payload.data[1].ls,  ket: payload.data[1].ket },
@@ -240,6 +249,7 @@ const actions = {
           })
           .then((response) => {                         
               commit('ASSIGN_DATA', response.data);
+              commit('ASSIGN_TOTAL', response.data.costDesain);
               dispatch('filter_spk');
               dispatch('query_data');              
               resolve(response.data)
@@ -540,8 +550,7 @@ if (payload != '') {
   query_data ({commit}) {
       return new Promise((resolve, reject) => {
           axios.get(`/api/query_data`)
-          .then((response) => {
-              console.log(response.data.data);
+          .then((response) => {              
               commit('MUAT_DATA', response.data)              
               resolve(response.data)
           })

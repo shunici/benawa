@@ -144,6 +144,7 @@ export default {
         ...mapState('karyawan_stores', {
             karyawans : state=> state.karyawans,
             karyawan : state=> state.karyawan,
+            data_upah : state=> state.upah,
         }),
         ...mapState('label_stores', {
                 labels : state=> state.labels
@@ -159,10 +160,8 @@ export default {
             query_kategori(e)  {              
             var nama = e.target.value;         
             this.spk.desainer = nama;  
-             this.ttd.nama = nama;
-                            
-            },              
-      
+             this.ttd.nama = nama;                            
+            },                    
     }
 
    

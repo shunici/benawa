@@ -58,8 +58,7 @@ const actions = {
     edit_data_produk({ commit }, payload) {
         return new Promise((resolve, reject) => {
             axios.get(`/api/produk/edit/${payload}`)
-            .then((response) => {
-                console.log(response)
+            .then((response) => {                
                 resolve(response.data)
             })
         })
@@ -67,8 +66,7 @@ const actions = {
     update_data_produk({ commit, state }, payload) {
         return new Promise((resolve, reject) => {
             axios.post(`/api/produk/update/${state.id}`, payload)
-            .then((response) => {
-                console.log(response.data)
+            .then((response) => {                
                 resolve(response.data)
             })
             .catch((error) => {

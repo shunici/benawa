@@ -252,7 +252,7 @@
                             {{san.nama}}
                         </span><br>
                    
-                   <img v-if="item.foto" :src="'/storage/spk/'+ item.foto_spk" :alt="item.foto_spk" style="width : 100%">
+                   <img v-if="item.foto_spk" :src="'/storage/spk/'+ item.foto_spk" :alt="item.foto_spk" style="width : 100%">
                     
                 </b-card>
             </b-collapse>
@@ -388,7 +388,7 @@
                             {{san.nama}}
                         </span>
 <br>
-                    <img v-if="item.foto" :src="'/storage/spk/'+ item.foto_spk" :alt="item.foto_spk" style="width : 100%">
+                    <img v-if="item.foto_spk" :src="'/storage/spk/'+ item.foto_spk" :alt="item.foto_spk" style="width : 100%">
                     
                 </b-card>
             </b-collapse>
@@ -529,7 +529,7 @@
                             {{san.nama}}
                         </span>
 <br>
-                    <img v-if="item.foto" :src="'/storage/spk/'+ item.foto_spk" :alt="item.foto_spk" style="width : 100%">
+                    <img v-if="item.foto_spk" :src="'/storage/spk/'+ item.foto_spk" :alt="item.foto_spk" style="width : 100%">
                     
                 </b-card>
             </b-collapse>

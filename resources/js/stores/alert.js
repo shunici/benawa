@@ -116,8 +116,7 @@ const actions = {
                     per_page: state.perPage,
                 }
             })
-            .then((response) => {        
-                console.log(response.data.data)       
+            .then((response) => {                          
                 commit('ASSIGN_DATA', response.data)
                 resolve(response.data)
             })
@@ -126,8 +125,7 @@ const actions = {
     submit_alert({ dispatch, commit, state }) {
         return new Promise((resolve, reject) => {
             axios.post(`/api/alert`, state.alert)
-            .then((response) => {
-                console.log(response)
+            .then((response) => {                
                 dispatch('get_alert').then(() => {
                     resolve(response.data)
                     commit('CLEAR_FORM'); 
@@ -152,7 +150,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             axios.post(`/api/gabung-alert`, data)
             .then((response) => {       
-                 console.log(response)
+                 
                         
             })
            })
@@ -161,7 +159,7 @@ const actions = {
       return new Promise((resolve, reject) => {
         axios.post(`/api/gabung-alert`, payload)
         .then((response) => {       
-             console.log(response)
+             
                     
         })
        })

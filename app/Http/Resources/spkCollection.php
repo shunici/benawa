@@ -8,11 +8,12 @@ class spkCollection extends ResourceCollection
 {
     
 
-    
+   
     public function toArray($request)
     {
         return [
-            'data' => $this->collection
+            'data' => $this->collection,
+            'costDesain' => $this->collection->sum('costDesain'), //ini untuk mencari harga            
         ];
     }
 }

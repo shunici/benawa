@@ -117,7 +117,7 @@
 <script>
   import { mapActions, mapState } from 'vuex'
 export default {
-    name : 'footerspk',
+    name : 'footerSpk',
     computed : {
   ...mapState('spk_stores', {
                     ket : state=> state.ket_lain,   

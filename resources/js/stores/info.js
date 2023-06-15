@@ -74,8 +74,7 @@ const actions = {
         let search = typeof payload != 'undefined' ? payload:''
         return new Promise((resolve, reject) => {
             axios.get(`/api/info?page=${state.page}&q=${search}`)
-            .then((response) => {        
-                console.log(response.data.data)       
+            .then((response) => {                        
                 commit('ASSIGN_DATA', response.data)
                 resolve(response.data)
             })
@@ -85,7 +84,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             axios.post(`/api/info`, state.info)
             .then((response) => {
-                console.log(response)
+                
                 dispatch('get_info').then(() => {
                     resolve(response.data)
                     commit('CLEAR_FORM'); 

@@ -35,8 +35,7 @@ const actions = {
         let search = typeof payload != 'undefined' ? payload:''
         return new Promise((resolve, reject) => {
             axios.get(`/api/label?page=${state.page}&q=${search}`)
-            .then((response) => {        
-                console.log(response.data.data)       
+            .then((response) => {                             
                 commit('ASSIGN_DATA', response.data)
                 resolve(response.data)
             })
@@ -45,8 +44,7 @@ const actions = {
     submit_label({ dispatch, commit, state }) {
         return new Promise((resolve, reject) => {
             axios.post(`/api/label`, state.label)
-            .then((response) => {
-                console.log(response)
+            .then((response) => {                
                 dispatch('get_label').then(() => {
                     resolve(response.data)
                 })

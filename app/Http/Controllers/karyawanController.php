@@ -55,4 +55,44 @@ class karyawanController extends Controller
         $data->delete();  
         return response()->json(['status' => 'success'], 200);
     }
+
+    public function upah ()
+    {
+        $upah = [
+            
+            [
+                'nama' => 'Pilih',
+                'upah' => 0
+            ],
+            [
+                'nama' => 'D',
+                'upah' => 5000
+            ],
+            [
+                'nama' => 'R',
+                'upah' => 10000
+            ],
+            [
+                'nama' => 'R+',
+                'upah' => 15000
+            ],
+            [
+                'nama' => '2R+',
+                'upah' => 25000
+            ],
+            [
+                'nama' => '3R+',
+                'upah' => 35000
+            ],
+            [
+                'nama' => '10R',
+                'upah' => 10000
+            ],
+            [
+                'nama' => '-',
+                'upah' => 0
+            ],
+        ];
+        return response()->json([ 'data_upah' => $upah]);
+    }
 }

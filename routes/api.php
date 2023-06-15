@@ -67,7 +67,7 @@ Route::post('/gabung-alert', 'alertController@gabung');
 
 Route::resource('/karyawan', 'karyawanController')->except(['show', 'update']);
 Route::post('/karyawan/update/{id}', 'karyawanController@update'); 
-
+Route::get('/upah', 'karyawanController@upah');
 
 
 Route::resource('/spk', 'spkController')->except(['show', 'update']);

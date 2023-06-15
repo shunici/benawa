@@ -62,8 +62,7 @@ const actions = {
     update_data_pemesan({ commit, state }, payload) {
         return new Promise((resolve, reject) => {
             axios.post(`/api/pemesan/update/${state.id}`, payload)
-            .then((response) => {
-                console.log(response);
+            .then((response) => {                
                 resolve(response.data)
             })
             .catch((error) => {
@@ -84,8 +83,7 @@ const actions = {
     cari_pemesan ({commit}) {
         return new Promise((resolve, reject) => {
             axios.get(`/api/cari_pemesan`)
-            .then((response) => {
-                console.log(response.data.data);
+            .then((response) => {                
                 commit('MUAT_DATA', response.data)              
                 resolve(response.data)
             })

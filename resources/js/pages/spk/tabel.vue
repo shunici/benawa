@@ -112,7 +112,8 @@
                       <div id="demoFont"  @dblclick="aktif_pesan" v-else :style="{fontSize : uk_font + 'rem'}"><strong class="text-uppercase">{{spk.text}}</strong> </div>
                     </tr>                
                 </table> 
-                
+            
+
 <p><i>Spk dibuat pada pukul :  <b> {{pukul}}</b> </i> </p>
       <table class="table table-bordered table-sm " style="margin-top: -13px;">
                     <tr style="text-align: center;" class="bg-info" >
@@ -124,7 +125,16 @@
                         <td>Status</td>
                     </tr>
                     <tr class="text-center">
-                        <td></td>
+                        <td @dblclick="show_select = !show_select">
+                                                     
+                            <select v-if="show_select" name="sdsd" v-on:change="desainUpah($event)"  >
+                                  <option  v-for="(row, index) in data_upah" :key="index + 'tes'" :value="row.upah" :id="row.nama"  >
+                                    {{row.nama}} 
+                                  </option>
+                            </select> 
+                            <span v-else>{{spk.costName}}</span>
+
+                        </td>
                         <td>{{ttd.nama}}</td>
                         <td></td>
                         <td></td>
@@ -161,11 +171,10 @@
            
               </span>
 
-
           
     </div> 
 
-     
+  
     </div>
 </template>
 <script>
@@ -176,7 +185,7 @@ moment.locale('id');
   import { mapActions, mapState } from 'vuex'
   export default {
     props : ['produks', 'bahans', 'pemesans'],
-    name : 'tabel',
+    name : 'tabelSPK',
     created(){
         
         
@@ -201,7 +210,7 @@ moment.locale('id');
          total : [],
          ket : [],  //utk ls or fns     
          sisi : [], //1 ssi or
-         printcut : [],
+         printcut : [],         
 
       }
     },
@@ -371,6 +380,7 @@ moment.locale('id');
               this.spk.data[index].nama_brg = nama_foto;
           },
         clear(evt){
+
           this.spk.data[evt].nama_brg = "";
           this.spk.data[evt].bahan = "";
           this.spk.data[evt].ukuranP = "";
@@ -390,7 +400,7 @@ moment.locale('id');
           
         },
         clear_all(){
-          
+          this.spk.text = "";
           for (let i = 0; i < 4; i++) {           
           this.spk.data[i].nama_brg = "";
           this.spk.data[i].bahan = "";
@@ -454,6 +464,13 @@ moment.locale('id');
           }, 1800000);
             //interval 30 menit
 
+        },         
+        desainUpah(e){
+           var name = e.target.options[e.target.options.selectedIndex].text;
+          var value = e.target.value; 
+          this.spk.costDesain = value;
+          this.spk.costName = name;
+          this.show_select = null;                          
         }
 
     }, //tutup metod
@@ -480,6 +497,9 @@ moment.locale('id');
         }),
         ...mapState('bahan_stores', {
             bahan_data : state=> state.bahans.data
+        }),
+        ...mapState('karyawan_stores', {
+            data_upah : state=> state.upah
         }),
       
     },
@@ -547,7 +567,7 @@ moment.locale('id');
        this.spk.nama_pemesan= this.selected_nm_pemesan.nama_asli;
        this.spk.no_wa = this.selected_nm_pemesan.telpon;       
         this.show_select = null; 
-      },  
+      }, 
        
 
 

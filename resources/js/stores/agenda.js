@@ -160,7 +160,7 @@ const actions = {
       return new Promise((resolve, reject) => {
         axios.post(`/api/gabung-agenda`, payload)
         .then((response) => {       
-             console.log(response)
+             
                     
         })
        })

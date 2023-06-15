@@ -42,6 +42,7 @@ let ROOT_PATH = 'https://raw.githubusercontent.com/shunici/behabarusaha/main/blo
                 this.get_label();  
                 this.get_info();  
                 this.get_karyawan();
+                       this.get_upah();
                 this.get_warna();
                 this.get_spk(); 
 
@@ -72,7 +73,7 @@ let ROOT_PATH = 'https://raw.githubusercontent.com/shunici/behabarusaha/main/blo
     },
     methods : {
             ...mapActions('info_stores', ['get_info']),
-        ...mapActions('karyawan_stores', ['get_karyawan']),     
+        ...mapActions('karyawan_stores', ['get_karyawan', 'get_upah']),     
         ...mapActions('agenda_stores', ['get_agenda']),                  
         ...mapActions('alert_stores', ['get_alert']),     
          ...mapActions('label_stores', ['get_label']),  

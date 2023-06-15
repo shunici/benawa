@@ -14,10 +14,15 @@
                                         <option value="25">25</option>
                                         <option value="50">50</option>
                                         <option value="100">100</option>
-                                        <option value="150">150</option>
-                                        <option value="200">200</option>
-                                        <option value="250">250</option>
                                         <option value="300">300</option>
+                                        <option value="500">500</option>
+                                        <option value="750">750</option>
+                                        <option value="1000">1000</option>
+                                        <option value="1500">1500</option>
+                                        <option value="2000">2000</option>
+                                        <option value="3000">3000</option>
+                                        <option value="5000">5000</option>
+                                        <option value="10000">10000</option>
                             </select>
                             <label class="ml-2">Perpage</label>
                         </div>
@@ -111,6 +116,11 @@
                                         {{tgl_show(row.item.tgl)}}
                                     </div>
                                 </template>
+                                    <template #cell(costDesain)="row">
+                                    <div :key="row.index + 'cost'">
+                                            {{row.item.costDesain}}  || {{row.item.costName}} 
+                                    </div>
+                                </template>
 
                                  <template #cell(show_details)="row">
                                     <b-button size="sm" @click="row.toggleDetails" class="mr-2">
@@ -194,9 +204,21 @@
                                 <template #cell(aksi)="row">
                                     <div :key="row.index">
                                         <button class="btn btn-success btn-sm" @click="cs_set(row.item.id)"> Ubah Status</button>
-                                        <button class="btn btn-danger btn-sm" @click="hapus(row.item.id)" >Hapus</button>
+                                        <!-- <button class="btn btn-danger btn-sm" @click="hapus(row.item.id)" >Hapus</button> -->
                                     </div>
                                 </template>                              
+
+                            <template v-slot:custom-foot v-if="fields[2].visible">    
+                                 <tr class="bg-secondary" >                                        
+                                        <th colspan="2">Grand Total</th>
+                                       
+                                        <th colspan="2" class="text-right" > Rp {{rupiah(total)}}</th>
+                                        
+                                        <th colspan="3">{{total | terbilang}} Rupiah</th>                                      
+                                    </tr>
+                            </template>
+
+
 
                                 </b-table>
 
@@ -243,9 +265,10 @@ export default {
         return {
             fields: [
                 {key: 'no_nota', label : 'Nota', sortable: true , visible: true}, 
-                {key: 'nama_pemesan', label : 'Pemesan', sortable: true , visible: true},   
-                {key: 'tgl', label : 'Tgl Msk', sortable: true, visible: true}, 
-                {key: 'kategori', label : 'Kategori', sortable: true, visible: true},                        
+                {key: 'nama_pemesan', label : 'Pemesan', sortable: true , visible: true}, 
+                {key: 'costDesain', label : 'Cost', sortable: true, visible: false},                                    
+                {key: 'kategori', label : 'Kategori', sortable: true, visible: true}, 
+                {key: 'tgl', label : 'Tgl Msk', sortable: true, visible: true},                                      
                 {key : 'show_details', label :'Detail', sortable:true, visible: true},
                 {key: 'aksi', label : 'aksi', sortable: false, visible: true}, 
             ],
@@ -259,6 +282,7 @@ export default {
             spks : state=> state.spks,
             query : state=> state.query,
             hasil_data : state=> state.hasil_data,
+            total : state => state.total
         }),
         ...mapState('karyawan_stores', {
             karyawans : state=> state.karyawans,        
@@ -324,7 +348,16 @@ export default {
         }
     },
     methods : {
-        ...mapActions('spk_stores', ['get_spk', 'spk_cs', 'edit_spk', 'remove_spk']),      
+        ...mapActions('spk_stores', ['get_spk', 'spk_cs', 'edit_spk', 'remove_spk']),    
+        rupiah (num){
+            var tes = '';
+            if(num) {
+            tes = num.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+            }
+            return tes ;
+
+            
+        },
         edit(param){
              this.$router.push({
                   name : 'transaksi.edit',

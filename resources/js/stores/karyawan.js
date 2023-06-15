@@ -11,6 +11,7 @@ const state = () => ({
     currentKaryawan : '',
     page: 1,
     id: '',
+    upah : [], //data upah dari controller
     
 })
 
@@ -30,7 +31,10 @@ const mutations = {
     },
     SET_ID_UPDATE(state, payload) {
         state.id = payload
-    }
+    },    
+    ASSIGN_UPAH(state, payload) {
+        state.upah = payload
+    },
 }
 
 const actions = {
@@ -39,7 +43,17 @@ const actions = {
         return new Promise((resolve, reject) => {
             axios.get(`/api/karyawan?page=${state.page}&q=${search}`)
             .then((response) => {                         
-                commit('ASSIGN_DATA', response.data)
+                commit('ASSIGN_DATA', response.data)               
+                resolve(response.data)
+            })
+        })
+    },
+    get_upah ({commit}) {
+        return new Promise((resolve, reject) => {
+            axios.get(`/api/upah`)
+            .then((response) => {                         
+                commit('ASSIGN_UPAH', response.data.data_upah);
+                // console.log('upah desainer', response.data.data_upah)
                 resolve(response.data)
             })
         })

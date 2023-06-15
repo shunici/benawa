@@ -117,7 +117,7 @@
 <script>
 import { mapActions, mapState, mapMutations } from 'vuex'
     export default {
-      name : 'recent',
+      name : 'recentData',
       props : ['pemesans'],
          delimiters: ['${', '}'], // Avoid Twig conflicts
         data(){
