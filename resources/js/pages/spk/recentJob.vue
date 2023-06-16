@@ -1,6 +1,17 @@
 <template>
     <div>
 
+        <div class="form-check-inline  mt-1" >
+            <label for="1aa" class="form-check-label">
+                <input class="form-check-input" v-model="massal"  type="radio" name="massal" id="1aa" :value="false">Single
+            </label>
+        </div>
+        <div class="form-check-inline  mt-1">
+            <label for="2aa" class="form-check-label">
+                <input class="form-check-input"  v-model="massal" checked type="radio" name="massal" id="2aa" :value="true">Multi
+            </label>
+        </div>
+      
   
 <div class="card">
   <div class="card-header bg-success text-white" data-toggle="collapse" data-target="#outdoor" aria-expanded="true" aria-controls="outdoor" >
@@ -54,12 +65,12 @@
 <div class="card">
   <div class="card-header">
 
-        <div class="form-check  mt-1"  @click="mode_spk(true)">
+        <div class="form-check-inline  mt-1"  @click="mode_spk(true)">
             <label for="1aa" class="form-check-label">
-                <input class="form-check-input" checked type="radio" name="mode_spk" id="1aa" value="0">Automatis
+                <input class="form-check-input" checked type="radio" name="mode_spk" id="1aa" value="0">Auto
             </label>
         </div>
-        <div class="form-check  mt-1" @click="mode_spk(false)">
+        <div class="form-check-inline  mt-1" @click="mode_spk(false)">
             <label for="2aa" class="form-check-label">
                 <input class="form-check-input" type="radio" name="mode_spk" id="2aa" value="4">Manual
             </label>
@@ -126,6 +137,7 @@ import { mapActions, mapState, mapMutations } from 'vuex'
                        filelist: [], // Store our uploaded files          
                        nama_array : [],
                        id_pemesan_foto : '',
+                       massal : false
             }
         },
         created(){
@@ -174,8 +186,8 @@ import { mapActions, mapState, mapMutations } from 'vuex'
                 this.recent_job.ket = ket;
                 this.recent_job.keterangan = keterangan;
 
-               if(this.urutan != null) {                 
-                 let id = this.urutan;
+               if(this.urutan != null && this.massal == false ) {                    
+                 let id = this.urutan;                              ;
                  this.spk.data[id].nama_brg = nama_brg; 
                   this.spk.data[id].bahan = bahan;
                  this.spk.data[id].uk_alias = uk_alias;
@@ -184,6 +196,20 @@ import { mapActions, mapState, mapMutations } from 'vuex'
                   this.spk.data[id].ket = ket ? ket : "";
                   this.spk.data[id].qty = 1; 
                }
+               if(this.massal) {    
+                 for (var i = 0; i <= 3; i++) {
+                   this.spk.data[i].nama_brg = nama_brg; 
+                  this.spk.data[i].bahan = bahan;
+                 this.spk.data[i].uk_alias = uk_alias;
+                 this.spk.data[i].fns = fns;
+                 this.spk.data[i].ls = ls;
+                  this.spk.data[i].ket = ket ? ket : "";
+                  this.spk.data[i].qty = 1; 
+                  }             
+                
+               }
+
+
 
             },
 
