@@ -79,7 +79,7 @@ const state = () => ({
       cp : [],
       cs : [],
       csd : [],                      
-      perPage: 100,
+      perPage: 500,
       currentPage: 1,      
       mulai_tgl : '',
       akhir_tgl : '',

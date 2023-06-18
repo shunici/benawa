@@ -5,7 +5,7 @@
    <div class="container-fluid">
           <router-view></router-view>
    </div>
-    <footer-component v-if="route_skr != 'kostumer' "></footer-component>
+    <!-- <footer-component v-if="route_skr != 'kostumer' "></footer-component> -->
          
     </div>
 </template>

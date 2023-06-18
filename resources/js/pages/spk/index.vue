@@ -61,24 +61,27 @@
                                  <tabel :produks="data_produk" :bahans="data_bahan" :pemesans="data_pemesan"></tabel>         
                          </div>
                     </page>
+                        <footer-spk></footer-spk>  
+                        <footer-component></footer-component>
                 </div>
         </div>    <!-- //tutup card -->  
 
 
                
     </div>  <!-- //tutup col -->  
-    <div class="col-12 mb-5">
-          <footer-spk></footer-spk>   
-    </div>
   
     </div>  <!-- //tutup row -->   
 
+    <div class="row mb-5 text-center">
+       
+    </div>
 
 
 </div>
 </template>
 
 <script>   
+import footerComponent from '../../components/footerComponent.vue';
 import footerSpk from './footerSPK.vue';
 
 import moment from "moment"
@@ -228,7 +231,7 @@ import {mapActions, mapState, mapMutations} from 'vuex'
     },
 
     components : {
-        tabel, recentKost,footerSpk, labelCetak, 
+        tabel, recentKost,footerSpk, labelCetak, footerComponent
         
     }
 

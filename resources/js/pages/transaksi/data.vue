@@ -110,7 +110,9 @@
                                   <option value="75">75</option>  
                                   <option value="100">100</option>  
                                   <option value="150">150</option>  
-                                  <option value="200">200</option>                       
+                                  <option value="200">200</option> 
+                                  <option value="500">500</option>                        
+                                  <option value="700">700</option>                                    
                             </select>
                         </div>
                     </div>  

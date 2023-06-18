@@ -11,7 +11,16 @@
                 <input class="form-check-input"  v-model="massal" checked type="radio" name="massal" id="2aa" :value="true">Multi
             </label>
         </div>
-      
+   <div class="form-check-inline  mt-1"  @click="mode_spk(true)">
+            <label for="mode_spk1" class="form-check-label">
+                <input class="form-check-input" checked type="radio" name="mode_spk" id="mode_spk1" value="0">Auto
+            </label>
+        </div>
+        <div class="form-check-inline  mt-1" @click="mode_spk(false)">
+            <label for="mode_spk2" class="form-check-label">
+                <input class="form-check-input" type="radio" name="mode_spk" id="mode_spk2" value="4">Manual
+            </label>
+        </div>
   
 <div class="card">
   <div class="card-header bg-success text-white" data-toggle="collapse" data-target="#outdoor" aria-expanded="true" aria-controls="outdoor" >
@@ -65,16 +74,20 @@
 <div class="card">
   <div class="card-header">
 
-        <div class="form-check-inline  mt-1"  @click="mode_spk(true)">
-            <label for="1aa" class="form-check-label">
-                <input class="form-check-input" checked type="radio" name="mode_spk" id="1aa" value="0">Auto
-            </label>
-        </div>
-        <div class="form-check-inline  mt-1" @click="mode_spk(false)">
-            <label for="2aa" class="form-check-label">
-                <input class="form-check-input" type="radio" name="mode_spk" id="2aa" value="4">Manual
-            </label>
-        </div>
+     
+    <span>  
+
+    <div class="form-check form-check-inline" v-for="(item, index) in nama_array" :key="index+'labl'">
+      <label class="form-check-label" v-on:change="cari_array_nama($event)">
+        <input class="form-check-input"  type="radio" name="nama_perc" :id="item.nama" :value="item.id_kostumer"> <span class="text-uppercase">{{item.nama}}</span>
+        <span class="badge badge-warning"> {{item.id_kostumer}}</span>
+      </label>
+    </div>  
+    </span>
+    <div class="form-group">
+      <label for="id">Id Kostumer</label> 
+      <input type="text" class="form-control" v-model="spk.id_kostumer">
+    </div>
       
     <div class="p-12 bg-gray-100 border border-gray-300" @dragover="dragover" @dragleave="dragleave" @drop="drop">
     <input style="display:none" type="file" multiple name="fields[assetsFieldHandle][]" id="assetsFieldHandle" 
@@ -95,21 +108,8 @@
       <label for="tel">No Telp</label> <button class="float-right btn btn-sm" @click="clear_phone">Clear Phone</button>
       <input type="text" class="form-control" v-model="spk.no_wa">
     </div>
-    
-    <div class="form-group">
-      <label for="id">Id Kostumer</label> 
-      <input type="text" class="form-control" v-model="spk.id_kostumer">
-    </div>
 
-    <span>  
 
-    <div class="form-check form-check-inline" v-for="(item, index) in nama_array" :key="index+'labl'">
-      <label class="form-check-label" v-on:change="cari_array_nama($event)">
-        <input class="form-check-input"  type="radio" name="nama_perc" :id="item.nama" :value="item.id_kostumer"> <span class="text-uppercase">{{item.nama}}</span>
-        <span class="badge badge-warning"> {{item.id_kostumer}}</span>
-      </label>
-    </div>  
-    </span>
   </div>
 </div>
 
@@ -217,6 +217,8 @@ import { mapActions, mapState, mapMutations } from 'vuex'
               onChange() {
               this.spk.id_kostumer = '';
               this.spk.foto = '';
+                this.spk.costDesain = 0;
+               this.spk.costName = "";
                 this.spk.user = [];
                this.filelist = [...this.$refs.file.files];   
 

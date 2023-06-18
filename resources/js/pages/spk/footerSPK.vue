@@ -1,5 +1,5 @@
 <template>
-<div class="noprint mt-3 mb-4 bantuan text-center">     
+<div class="noprint mt-3 mb-4 col-12 text-center">     
 <p>Jarak Space Label <b>{{uk_label}}</b> cm  |  mode spk <i><b>{{ mode ? 'Automatic' : 'Manual' }}</b></i> </p> 
 <div class="btn-group">
     
@@ -38,7 +38,15 @@
         </div>
 
         <button type="button" class="btn btn-info"  @click="pesan('print n cut')">Print N Cut</button>
-        <button type="button" class="btn btn-primary"  @click="pesan('')">Kosong</button>
+        <button type="button" class="btn btn-primary"  @click="pesan('')">
+              <b-icon icon="trash"></b-icon>
+        </button>
+        <button type="button" class="btn btn-primary"  @click="tbhTabel">
+            <b-icon icon="border-width"></b-icon>
+        </button>
+        <button type="button" class="btn btn-primary"  @click="dltTabel">
+            <b-icon icon="trash2-fill"></b-icon>
+        </button>
 
 
 </div>
@@ -124,7 +132,9 @@ export default {
                      resolusi : state=> state.resolusi,  
                        uk_label : state=> state.uk_label,     
                        bahanDF : state=> state.bahan,  
-                         mode : state=> state.mode,    
+                         mode : state=> state.mode,   
+                           spk : state=> state.spk.data,   
+
 
                 }),
     },
@@ -145,17 +155,22 @@ export default {
           
                  this.$store.state.spk_stores.uk_label = param
            }, 
+           tbhTabel(){
+               let data = { id: 4, nama_brg : '', produk_id: null, bahan: '', bahan_id : null, ukuranP : '', ukuranL: '', uk_alias: '', qty : null, fns:false, ls: false,  ket: null };
+              this.spk.push(data);
+           },
+           dltTabel(){
+               
+              this.spk.pop();
+
+           }
 
     }
 }
 </script>
 
 <style scoped>
-.bantuan {
-    position: relative;
-    top : 150px;
-    margin-left: -150px;
-}
+
 /* resolusi
 40  == 15.74803149606299
 60 == 23.62204724393699

@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="row">
 
 
 <!-- <h2>{{show_select}}</h2> -->
-    <div class="row"> 
+
       <div class="col-md-12">
          <p>Jika dalam penulisan SPK <b class="text-uppercase">{{spk.kategori}}</b> ini terdapat keterangan yang tidak sinkron  <b>SEGERA KONFIRMASI</b> kepihak terkait.  </p>
       </div>
@@ -172,7 +172,7 @@
               </span>
 
           
-    </div> 
+   
 
   
     </div>
@@ -401,6 +401,8 @@ moment.locale('id');
         },
         clear_all(){
           this.spk.text = "";
+          this.spk.costDesain = 0;
+               this.spk.costName = "";
           for (let i = 0; i < 4; i++) {           
           this.spk.data[i].nama_brg = "";
           this.spk.data[i].bahan = "";
